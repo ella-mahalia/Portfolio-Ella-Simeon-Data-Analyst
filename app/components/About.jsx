@@ -49,7 +49,7 @@ export const About = () => {
                     className="bg-white/10 backdrop-blur-sm rounded-3xl p-8 text-center border border-outer"
                 >
                     <h3 className="text-5xl md:text-6xl font-bold text-gradient mb-2">
-                        3+
+                        10+
                     </h3>
                     <p className="text-gray-700 font-medium text-lg">Data & Tech Projects</p>
                 </motion.div>

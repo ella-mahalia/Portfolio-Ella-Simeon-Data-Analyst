@@ -47,7 +47,7 @@ export const Footer = () => {
                 transition={{ duration: 0.6, delay: 0.2 }}
                 viewport={{ once: true }}
                 className="text-xl md:text-2xl font-semibold text-gradient max-w-3xl mx-auto mb-8">
-                © 2025 Ella Simeon | Aspiring Data Analyst & Developer | Striving to make an impact in the corporate world
+                © 2025 Ella Simeon | Data Analyst & Developer | Striving to make an impact in the corporate world
             </motion.p>
             <motion.hr
                 initial={{ scaleX: 0 }}

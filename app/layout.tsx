@@ -1,7 +1,7 @@
+import { ReactNode } from "react";
 import { Syne } from "next/font/google";
 import "./globals.css";
 
-//Custom fonts
 const syne = Syne({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700", "800"],
@@ -12,13 +12,14 @@ export const metadata = {
   description: "Full Stack Developer Portfolio",
 };
 
-export default function RootLayout({children}) {
+type RootLayoutProps = {
+  children: ReactNode;
+};
+
+export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en">
-      <body
-        className={`${syne.className} antialiased`} 
-        suppressHydrationWarning={true} 
-      >
+      <body className={`${syne.className} antialiased`} suppressHydrationWarning>
         {children}
       </body>
     </html>
