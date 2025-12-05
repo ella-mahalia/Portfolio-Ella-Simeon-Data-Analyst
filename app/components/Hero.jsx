@@ -15,6 +15,7 @@ export const Hero = () => {
         "/assets/icon-6.svg",
         "assets/icon-7.svg",
         "assets/icon-8.svg",
+        "assets/icon-9.svg",
     ];
     // Animation variants
     const container = {

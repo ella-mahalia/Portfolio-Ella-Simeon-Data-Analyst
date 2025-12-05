@@ -34,6 +34,20 @@ export const Portfolio = () => {
       tags: ["Machine Learning", "Python", "Data Science"],
       link: "https://ellamahalia.pythonanywhere.com/heart_attack",
     },
+    {
+      id: 5,
+      title: "Tech Skills, Salaries & Job Trends",
+      image: "assets/project-5.png",
+      tags: ["SQL", "Data Analysis", "Data Visualization", "ETL / Data Cleaning", "Analytics"],
+      link: "https://github.com/ella-mahalia/SQL_Project_Data_Job_Analysis",
+    },
+    {
+      id: 6,
+      title: "Spotify Data Analysis Project",
+      image: "assets/project-6.png",
+      tags: ["SQL", "Music Data", "Data Exploration", "Audio Analytics", "Advanced Queries"],
+      link: "https://ellamahalia.bitdocs.ai/share/d/DpbwFqWZV9qvXzgv",
+    },
   ];
 
   // Animation variants
