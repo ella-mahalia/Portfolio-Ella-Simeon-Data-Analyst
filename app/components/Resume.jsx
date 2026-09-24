@@ -1,9 +1,12 @@
 import React from 'react';
-import { PiGraduationCapFill, PiStarFourFill } from 'react-icons/pi';
+import {
+    PiGraduationCapFill,
+    PiBriefcaseFill,
+    PiStarFourFill,
+} from 'react-icons/pi';
 import { motion } from 'framer-motion';
 
 export const Resume = () => {
-    // Education array
     const educationData = [
         {
             year: "August 2021 - May 2025",
@@ -19,19 +22,18 @@ export const Resume = () => {
         },
     ];
 
-    // Work data array
     const workData = [
         {
             year: "January 2024 - August 2025",
             title: "Data Analyst",
             company: "New York Department of Transportation",
-            description: "Designed and deployed interactive Power BI dashboards to track package locker usage, identifying peak hours, pickup durations, and borough-level trends. Developed custom DAX measures and optimized ETL workflows integrating data from multiple sources, including SOAP APIs, ensuring data accuracy and actionable insights. Implemented SQL upsert functions and managed Power BI Online datasets to improve query performance and streamline cross-team data accessibility."
+            description: "Designed and deployed interactive Power BI dashboards to track package locker usage, identifying peak hours, pickup durations, and borough-level trends. Developed custom DAX measures and optimized ETL workflows integrating data from multiple sources, including SOAP APIs, ensuring data accuracy and actionable insights. Implemented SQL upsert functions and managed Power BI Online datasets to improve query performance and streamline cross-team data accessibility.",
         },
         {
             year: "January 2026 - Present",
             title: "IT Data Analyst",
             company: "Metropolitan Transportation Authority (MTA)",
-            description: "Develop Power BI dashboards that give IT leaders and assignment group managers a clear view of open incidents, tasks, changes, problems, and strategic work. Build DAX measures to track backlog, aging, and items needing attention, and automate ServiceNow data refreshes through Power Automate and SharePoint."
+            description: "Develop Power BI dashboards that give IT leaders and assignment group managers a clear view of open incidents, tasks, changes, problems, and strategic work. Build DAX measures to track backlog, aging, and items needing attention, and automate ServiceNow data refreshes through Power Automate and SharePoint.",
         },
     ];
 
@@ -98,9 +100,15 @@ export const Resume = () => {
                                                 {edu.year}
                                             </span>
                                         </div>
-                                        <h4 className="text-lg font-semibold text-content">{edu.title}</h4>
-                                        <p className="text-gray-600 mb-2">{edu.institution}</p>
-                                        <p className="text-gray-800 text-md">{edu.description}</p>
+                                        <h4 className="text-lg font-semibold text-content">
+                                            {edu.title}
+                                        </h4>
+                                        <p className="text-gray-600 mb-2">
+                                            {edu.institution}
+                                        </p>
+                                        <p className="text-gray-800 text-md">
+                                            {edu.description}
+                                        </p>
                                     </div>
                                 </motion.div>
                             ))}
@@ -131,7 +139,7 @@ export const Resume = () => {
                                 >
                                     <div className="flex-shrink-0">
                                         <div className="w-8 h-8 custom-gradient rounded-full flex items-center justify-center">
-                                            <PiGraduationCapFill className="w-4 h-4 text-white" />
+                                            <PiBriefcaseFill className="w-4 h-4 text-white" />
                                         </div>
                                     </div>
                                     <div className="flex-1 min-w-0">
@@ -140,9 +148,15 @@ export const Resume = () => {
                                                 {work.year}
                                             </span>
                                         </div>
-                                        <h4 className="text-lg font-semibold text-content">{work.title}</h4>
-                                        <p className="text-gray-600 mb-2">{work.company}</p>
-                                        <p className="text-gray-800 text-md">{work.description}</p>
+                                        <h4 className="text-lg font-semibold text-content">
+                                            {work.title}
+                                        </h4>
+                                        <p className="text-gray-600 mb-2">
+                                            {work.company}
+                                        </p>
+                                        <p className="text-gray-800 text-md">
+                                            {work.description}
+                                        </p>
                                     </div>
                                 </motion.div>
                             ))}

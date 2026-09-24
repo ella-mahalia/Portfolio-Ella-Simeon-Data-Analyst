@@ -1,10 +1,16 @@
-import React from 'react';
-import { PiStarFourFill } from 'react-icons/pi';
-import { HiArrowUpRight, HiLockClosed } from 'react-icons/hi2';
-import { motion } from 'framer-motion';
+"use client";
+
+import React, { useEffect, useRef, useState } from "react";
+import { PiStarFourFill } from "react-icons/pi";
+import {
+  HiArrowLeft,
+  HiArrowRight,
+  HiArrowUpRight,
+  HiLockClosed,
+} from "react-icons/hi2";
+import { motion } from "framer-motion";
 
 export const Portfolio = () => {
-  // Projects array
   const projects = [
     {
       id: 5,
@@ -16,158 +22,339 @@ export const Portfolio = () => {
     {
       id: 1,
       title: "House Prediction ML Model",
-      image: "assets/project-1.png",
+      image: "/assets/project-1.png",
       tags: ["Machine Learning", "Regression Analysis"],
       link: "https://ellamahalia.pythonanywhere.com/house_price_prediction",
     },
     {
       id: 2,
       title: "Package Locker Utilization Dashboard",
-      image: "assets/project-2.png",
-      tags: ["Data Analytics", "Power BI", "SQL", "ETL", "Dashboard Design"],
-      // 🔒 No link (company-owned)
+      image: "/assets/project-2.png",
+      tags: [
+        "Data Analytics",
+        "Power BI",
+        "SQL",
+        "ETL",
+        "Dashboard Design",
+      ],
     },
     {
       id: 3,
       title: "Loyalty Program Impact Analysis",
-      image: "assets/project-3.png",
-      tags: ["Data Analytics", "Customer Segmentation", "A/B Testing", "Power BI"],
-      // 🔒 No link (company-owned)
+      image: "/assets/project-3.png",
+      tags: [
+        "Data Analytics",
+        "Customer Segmentation",
+        "A/B Testing",
+        "Power BI",
+      ],
     },
     {
       id: 4,
       title: "Heart Attack Classification Model",
-      image: "assets/project-4.png",
+      image: "/assets/project-4.png",
       tags: ["Machine Learning", "Python", "Data Science"],
       link: "https://ellamahalia.pythonanywhere.com/heart_attack",
     },
-    
+    {
+      id: 6,
+      title: "Subway Ridership Forecast & Station Trends",
+      image: "/subway-ridership-forecast/cover.png",
+      tags: [
+        "Public MTA Data",
+        "Time Series",
+        "Forecasting",
+        "Python",
+      ],
+      link: "/subway-ridership-forecast/index.html",
+    },
   ];
 
-  // Animation variants
-  const container = {
-    hidden: {},
-    show: {
-      transition: {
-        staggerChildren: 0.25,
-      },
-    },
+  const trackRef = useRef(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  /* ======================================================
+      GET CARD WIDTH + GAP
+  ====================================================== */
+
+  const getScrollAmount = () => {
+    const track = trackRef.current;
+
+    if (!track) return 0;
+
+    const card = track.querySelector(".portfolio-slider-card");
+
+    if (!card) return 0;
+
+    const styles = window.getComputedStyle(track);
+    const gap = parseFloat(styles.columnGap || styles.gap || 0);
+
+    return card.offsetWidth + gap;
   };
 
-  const card = {
-    hidden: { opacity: 0, y: 60, rotateX: -10 },
-    show: {
-      opacity: 1,
-      y: 0,
-      rotateX: 0,
-      transition: { duration: 0.6, ease: "easeOut" },
-    },
+  /* ======================================================
+      ARROW CONTROLS
+  ====================================================== */
+
+  const scrollProjects = (direction) => {
+    const track = trackRef.current;
+
+    if (!track) return;
+
+    const amount = getScrollAmount();
+
+    track.scrollBy({
+      left: direction === "next" ? amount : -amount,
+      behavior: "smooth",
+    });
   };
+
+  /* ======================================================
+      UPDATE ACTIVE PROJECT
+  ====================================================== */
+
+  useEffect(() => {
+    const track = trackRef.current;
+
+    if (!track) return;
+
+    const handleScroll = () => {
+      const amount = getScrollAmount();
+
+      if (!amount) return;
+
+      const index = Math.round(track.scrollLeft / amount);
+
+      setActiveIndex(
+        Math.max(
+          0,
+          Math.min(index, projects.length - 1)
+        )
+      );
+    };
+
+    track.addEventListener("scroll", handleScroll, {
+      passive: true,
+    });
+
+    window.addEventListener("resize", handleScroll);
+
+    return () => {
+      track.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleScroll);
+    };
+  }, [projects.length]);
+
+  const progress =
+    ((activeIndex + 1) / projects.length) * 100;
 
   return (
-    <section className="my-8" id="portfolio">
-      {/* Heading */}
+    <section
+      id="portfolio"
+      className="portfolio-slider-section"
+    >
+      {/* =====================================================
+          HEADER
+      ===================================================== */}
+
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        viewport={{ once: true }}
-        className="text-center"
+        className="portfolio-slider-header"
+        initial={{
+          opacity: 0,
+          y: 25,
+        }}
+        whileInView={{
+          opacity: 1,
+          y: 0,
+        }}
+        viewport={{
+          once: true,
+          amount: 0.25,
+        }}
+        transition={{
+          duration: 0.65,
+        }}
       >
-        <p className="text-content font-semibold inline-flex items-center gap-1 border border-outer py-1.5 px-3 rounded-2xl mb-4">
-          <PiStarFourFill className="text-lg" />
-          Portfolio
-        </p>
-        <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-8 bg-gradient-to-r from-blue-500 via-blue-600 to-blue-900 text-transparent bg-clip-text">
-          Check out my featured <br />
-          projects
-        </h2>
+        <div className="portfolio-slider-heading-wrap">
+          {/* Keep your current Portfolio badge */}
+          <p className="portfolio-slider-badge">
+            <PiStarFourFill />
+            Portfolio
+          </p>
+
+          {/* Keep your current wording */}
+          <h2 className="portfolio-slider-title">
+             Check out my featured projects
+          </h2>
+        </div>
+
+        {/* Carousel arrows */}
+        <div className="portfolio-slider-controls">
+          <button
+            type="button"
+            className="portfolio-slider-arrow portfolio-slider-arrow-prev"
+            onClick={() => scrollProjects("prev")}
+            aria-label="Previous project"
+          >
+            <HiArrowLeft />
+          </button>
+
+          <button
+            type="button"
+            className="portfolio-slider-arrow portfolio-slider-arrow-next"
+            onClick={() => scrollProjects("next")}
+            aria-label="Next project"
+          >
+            <HiArrowRight />
+          </button>
+        </div>
       </motion.div>
 
-      {/* Projects Grid */}
+      {/* =====================================================
+          PROJECT CAROUSEL
+      ===================================================== */}
+
       <motion.div
-        variants={container}
-        initial="hidden"
-        whileInView="show"
-        viewport={{ once: true, amount: 0.2 }}
-        className="grid grid-cols-1 md:grid-cols-2 gap-8"
+        ref={trackRef}
+        className="portfolio-slider-track"
+        initial={{
+          opacity: 0,
+          y: 35,
+        }}
+        whileInView={{
+          opacity: 1,
+          y: 0,
+        }}
+        viewport={{
+          once: true,
+          amount: 0.15,
+        }}
+        transition={{
+          duration: 0.7,
+          delay: 0.08,
+        }}
       >
         {projects.map((project) => (
-          <motion.div
+          <motion.article
             key={project.id}
-            variants={card}
-            whileHover={{ scale: 1.03, rotateY: 3 }}
-            transition={{ type: "spring", stiffness: 100, damping: 12 }}
-            className="group relative bg-white/5 backdrop-blur-sm rounded-3xl overflow-hidden border border-white/10 cursor-pointer"
+            className="portfolio-slider-card"
+            whileHover={{
+              y: -6,
+            }}
+            transition={{
+              duration: 0.25,
+            }}
           >
-            {/* Image */}
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              transition={{ duration: 0.4 }}
-              className="relative overflow-hidden z-0"
-            >
+            {/* ===============================
+                PROJECT IMAGE
+            =============================== */}
+
+            <div className="portfolio-slider-image-wrap">
               <img
                 src={project.image}
                 alt={project.title}
-                className="w-full h-64 md:h-[450px] object-cover"
+                className="portfolio-slider-image"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-            </motion.div>
 
-            {/* Project Info */}
-            <div className="absolute bottom-4 left-4 right-4 p-3 md:p-6 rounded-2xl bg-black/20 backdrop-blur-md border-t border-white/10 z-10">
-              <motion.div
-                variants={container}
-                initial="hidden"
-                animate="show"
-                className="flex flex-wrap gap-2 mb-3"
-              >
-                {project.tags.map((tagText, index) => (
+              <div
+                className="portfolio-slider-image-shade"
+                aria-hidden="true"
+              />
+            </div>
+
+            {/* ===============================
+                GLASS CONTENT PANEL
+            =============================== */}
+
+            <div className="portfolio-slider-info">
+              {/* Tags */}
+
+              <div className="portfolio-slider-tags">
+                {project.tags.map((tagText) => (
                   <span
-                    key={index}
-                    className="px-3 py-1 bg-white/10 text-white/80 text-sm rounded-full border border-white/20"
+                    key={tagText}
+                    className="portfolio-slider-tag"
                   >
                     {tagText}
                   </span>
                 ))}
-              </motion.div>
+              </div>
 
-              <div className="flex items-center justify-between">
-                <h3 className="text-xl font-bold text-white transition-colors duration-300">
+              {/* Bottom title / link */}
+
+              <div className="portfolio-slider-card-bottom">
+                <h3 className="portfolio-slider-card-title">
                   {project.title}
                 </h3>
 
-                {/* Link or Private Indicator */}
                 {project.link ? (
                   <a
                     href={project.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-center w-10 h-10 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full text-white hover:bg-white/20 transition-colors duration-300 z-20"
+                    className="portfolio-slider-project-link"
+                    aria-label={`View ${project.title}`}
                     title="View project"
                   >
-                    <HiArrowUpRight className="text-lg" />
+                    <HiArrowUpRight />
                   </a>
                 ) : (
                   <div
-                    className="flex items-center justify-center w-10 h-10 bg-white/5 backdrop-blur-sm border border-white/10 rounded-full text-white/50 cursor-not-allowed"
+                    className="portfolio-slider-project-link portfolio-slider-project-private"
                     title="Private project (company-owned)"
+                    aria-label="Private project"
                   >
-                    <HiLockClosed className="text-lg opacity-40" />
+                    <HiLockClosed />
                   </div>
                 )}
               </div>
             </div>
-
-            {/* Hover glow effect (behind everything) */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              whileHover={{ opacity: 1 }}
-              transition={{ duration: 0.4 }}
-              className="absolute inset-0 rounded-3xl bg-gradient-to-r from-purple-500/10 to-pink-500/10 z-0 pointer-events-none"
-            ></motion.div>
-          </motion.div>
+          </motion.article>
         ))}
+      </motion.div>
+
+      {/* =====================================================
+          COUNTER + PROGRESS
+      ===================================================== */}
+
+      <motion.div
+        className="portfolio-slider-progress-row"
+        initial={{
+          opacity: 0,
+        }}
+        whileInView={{
+          opacity: 1,
+        }}
+        viewport={{
+          once: true,
+        }}
+        transition={{
+          duration: 0.7,
+          delay: 0.2,
+        }}
+      >
+        <div className="portfolio-slider-count">
+          <span className="portfolio-slider-current">
+            {String(activeIndex + 1).padStart(2, "0")}
+          </span>
+
+          <span className="portfolio-slider-slash">
+            /
+          </span>
+
+          <span className="portfolio-slider-total">
+            {String(projects.length).padStart(2, "0")}
+          </span>
+        </div>
+
+        <div className="portfolio-slider-progress">
+          <div
+            className="portfolio-slider-progress-fill"
+            style={{
+              width: `${progress}%`,
+            }}
+          />
+        </div>
       </motion.div>
     </section>
   );

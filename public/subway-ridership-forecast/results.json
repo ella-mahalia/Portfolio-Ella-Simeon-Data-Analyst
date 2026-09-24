@@ -1,0 +1,178 @@
+{
+  "source": "MTA Subway Hourly Ridership: Beginning 2025 (NY Open Data, 5wq4-mkjj)",
+  "metric": "Estimated paid subway entrances (sum across payment method and fare categories); not exits, unique riders, occupancy, or train capacity.",
+  "source_url": "https://data.ny.gov/Transportation/MTA-Subway-Hourly-Ridership-Beginning-2025/5wq4-mkjj",
+  "first_hour": "2026-06-01T00:00:00",
+  "last_hour": "2026-09-16T23:00:00",
+  "validation_week": "2026-08-03",
+  "holdout_week": "2026-08-17",
+  "forecast_week": "2026-09-17",
+  "stations": {
+    "611": {
+      "name": "Times Sq / Port Authority",
+      "full_name": "Times Sq-42 St/Port Authority Bus Terminal (1,2,3,7,A,C,E,N,Q,R,W,S)",
+      "borough": "Manhattan",
+      "method": "four_week_mean",
+      "validation": {
+        "prior_week": {
+          "wape": 8.0,
+          "mae": 472.5,
+          "coverage": 168
+        },
+        "four_week_mean": {
+          "wape": 5.4,
+          "mae": 318.8,
+          "coverage": 168
+        }
+      },
+      "holdout": {
+        "prior_week": {
+          "wape": 6.5,
+          "mae": 356.6,
+          "coverage": 168
+        },
+        "four_week_mean": {
+          "wape": 7.5,
+          "mae": 411.8,
+          "coverage": 168
+        }
+      },
+      "records": 2592,
+      "missing_hours": 0,
+      "total_entrances": 14857089
+    },
+    "610": {
+      "name": "Grand Central",
+      "full_name": "Grand Central-42 St (4,5,6,7,S)",
+      "borough": "Manhattan",
+      "method": "four_week_mean",
+      "validation": {
+        "prior_week": {
+          "wape": 5.5,
+          "mae": 242.7,
+          "coverage": 168
+        },
+        "four_week_mean": {
+          "wape": 4.9,
+          "mae": 217.1,
+          "coverage": 168
+        }
+      },
+      "holdout": {
+        "prior_week": {
+          "wape": 6.0,
+          "mae": 246.6,
+          "coverage": 168
+        },
+        "four_week_mean": {
+          "wape": 7.9,
+          "mae": 325.6,
+          "coverage": 168
+        }
+      },
+      "records": 2592,
+      "missing_hours": 0,
+      "total_entrances": 11347600
+    },
+    "607": {
+      "name": "Herald Square",
+      "full_name": "34 St-Herald Sq (B,D,F,M,N,Q,R,W)",
+      "borough": "Manhattan",
+      "method": "four_week_mean",
+      "validation": {
+        "prior_week": {
+          "wape": 6.6,
+          "mae": 209.0,
+          "coverage": 168
+        },
+        "four_week_mean": {
+          "wape": 5.7,
+          "mae": 180.2,
+          "coverage": 168
+        }
+      },
+      "holdout": {
+        "prior_week": {
+          "wape": 7.1,
+          "mae": 214.0,
+          "coverage": 168
+        },
+        "four_week_mean": {
+          "wape": 7.1,
+          "mae": 214.3,
+          "coverage": 168
+        }
+      },
+      "records": 2592,
+      "missing_hours": 0,
+      "total_entrances": 8091607
+    },
+    "616": {
+      "name": "Jackson Heights / Roosevelt Av",
+      "full_name": "Jackson Hts-Roosevelt Av/74 St-Broadway (7,E,F,M,R)",
+      "borough": "Queens",
+      "method": "four_week_mean",
+      "validation": {
+        "prior_week": {
+          "wape": 6.9,
+          "mae": 117.7,
+          "coverage": 168
+        },
+        "four_week_mean": {
+          "wape": 5.2,
+          "mae": 88.4,
+          "coverage": 168
+        }
+      },
+      "holdout": {
+        "prior_week": {
+          "wape": 6.3,
+          "mae": 106.0,
+          "coverage": 168
+        },
+        "four_week_mean": {
+          "wape": 5.5,
+          "mae": 92.4,
+          "coverage": 168
+        }
+      },
+      "records": 2592,
+      "missing_hours": 0,
+      "total_entrances": 4542100
+    },
+    "447": {
+      "name": "Flushing / Main St",
+      "full_name": "Flushing-Main St (7)",
+      "borough": "Queens",
+      "method": "four_week_mean",
+      "validation": {
+        "prior_week": {
+          "wape": 6.4,
+          "mae": 110.6,
+          "coverage": 168
+        },
+        "four_week_mean": {
+          "wape": 5.4,
+          "mae": 94.7,
+          "coverage": 168
+        }
+      },
+      "holdout": {
+        "prior_week": {
+          "wape": 7.0,
+          "mae": 120.6,
+          "coverage": 168
+        },
+        "four_week_mean": {
+          "wape": 6.0,
+          "mae": 104.0,
+          "coverage": 168
+        }
+      },
+      "records": 2592,
+      "missing_hours": 0,
+      "total_entrances": 4589703
+    }
+  },
+  "missing_station_hours": 0
+}

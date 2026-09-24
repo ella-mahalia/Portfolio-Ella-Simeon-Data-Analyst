@@ -1,29 +1,56 @@
 "use client";
 
-import { Hero } from './components/Hero';
-import { Navbar } from './components/Navbar';
-import Portfolio from './components/Portfolio';
-import { About } from './components/About';
-import { Resume } from './components/Resume';
-import { Contact } from './components/Contact';
-import { Footer } from './components/Footer';
+import { Hero } from "./components/Hero";
+import { Navbar } from "./components/Navbar";
+import Portfolio from "./components/Portfolio";
+import { About } from "./components/About";
+import { Resume } from "./components/Resume";
+import { Contact } from "./components/Contact";
+import { Footer } from "./components/Footer";
 
 export default function Home() {
   return (
-    <div className='max-w-6xl mx-auto w-[90%]'>
-      {/* Gradient Blobs */}
-      <div className='fixed top-0 right-0 w-48 h-48 md:w-96 md:h-96 bg-gradient-to-bl from-orange-200 via-pink-200 to-rose-300 rounded-b-full blur-2xl opacity-40 animate-pulse'></div>
-      <div className='fixed top-0 left-0 w-48 h-48 md:w-96 md:h-96 bg-gradient-to-tr from-cyan-200 via-blue-200 to-indigo-300 rounded-t-full blur-2xl opacity-40 animate-pulse' 
-      style={{animationDelay: '1s'}}
-      ></div>
-      {/* Components */}
-      <Navbar />
-      <Hero /> 
-      <Portfolio />
-      <About />
-      <Resume />
-      <Contact />
-      <Footer />
-    </div>
+    <main className="relative min-h-screen overflow-x-hidden">
+
+      {/* Background glow */}
+      <div
+        className="
+          pointer-events-none
+          fixed
+          top-[-18rem]
+          right-[10%]
+          z-0
+          h-[38rem]
+          w-[38rem]
+          rounded-full
+          bg-primary/10
+          blur-[150px]
+        "
+      />
+
+      {/* Navbar + Hero */}
+      <div className="relative z-10 w-full">
+        <Navbar />
+        <Hero />
+      </div>
+
+      {/* Portfolio needs full width */}
+      <div className="relative z-10 w-full">
+        <Portfolio />
+      </div>
+
+      {/* Remaining sections stay constrained */}
+      <div className="relative z-10 mx-auto w-[90%] max-w-6xl">
+        <About />
+        <Resume />
+        <Contact />
+      </div>
+
+      {/* Footer */}
+      <div className="relative z-10 w-full">
+        <Footer />
+      </div>
+
+    </main>
   );
 }
