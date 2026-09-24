@@ -48,10 +48,10 @@ export const About = () => {
                     whileHover={{ scale: 1.05 }}
                     className="bg-white/10 backdrop-blur-sm rounded-3xl p-8 text-center border border-outer"
                 >
-                    <h3 className="text-2xl md:text-3xl font-bold text-gradient mb-3">
-                        Analytics & BI
+                    <h3 className="text-5xl md:text-6xl font-bold text-gradient mb-2">
+                        10+
                     </h3>
-                    <p className="text-gray-700 font-medium text-base">Power BI • SQL • Python</p>
+                    <p className="text-gray-700 font-medium text-lg">Data & Tech Projects</p>
                 </motion.div>
 
                 {/* Card 2 */}
@@ -60,10 +60,10 @@ export const About = () => {
                     whileHover={{ scale: 1.05 }}
                     className="bg-white/10 backdrop-blur-sm rounded-3xl p-8 text-center border border-outer"
                 >
-                    <h3 className="text-2xl md:text-3xl font-bold text-gradient mb-3">
-                        Statistics & ML
+                    <h3 className="text-5xl md:text-6xl font-bold text-gradient mb-2">
+                        2+
                     </h3>
-                    <p className="text-gray-700 font-medium text-base">Experimentation • Predictive Modeling</p>
+                    <p className="text-gray-700 font-medium text-lg">Years of Experience</p>
                 </motion.div>
 
                 {/* Card 3 */}
@@ -72,10 +72,10 @@ export const About = () => {
                     whileHover={{ scale: 1.05 }}
                     className="bg-white/10 backdrop-blur-sm rounded-3xl p-8 text-center border border-outer"
                 >
-                    <h3 className="text-2xl md:text-3xl font-bold text-gradient mb-3">
-                        Real-World Impact
+                    <h3 className="text-5xl md:text-6xl font-bold text-gradient mb-2">
+                        1
                     </h3>
-                    <p className="text-gray-700 font-medium text-base">MTA • NYC DOT Projects</p>
+                    <p className="text-gray-700 font-medium text-lg">Public Sector Internship</p>
                 </motion.div>
             </motion.div>
 
@@ -96,12 +96,8 @@ export const About = () => {
                         viewport={{ once: true }}
                         className="text-gray-600 text-lg leading-relaxed"
                     >
-                        I’m Ella Simeon, a data analyst with experience turning complex data
-                        into dashboards and insights that support better decisions. At the MTA,
-                        I build Power BI reports that help IT leaders and managers monitor
-                        workloads, spot trends, and identify items needing attention. Previously,
-                        at the NYC Department of Transportation, I developed dashboards and
-                        improved data workflows for operational reporting.
+                        I’m Ella Simeon — a data analyst and full stack developer passionate about using data and technology to create meaningful solutions.
+                        My experience at the NYC Department of Transportation allowed me to develop interactive dashboards, automate ETL workflows, and uncover actionable insights that improved decision-making and operational efficiency.
                     </motion.p>
 
                     <motion.p
@@ -111,11 +107,8 @@ export const About = () => {
                         viewport={{ once: true }}
                         className="text-gray-600 text-lg leading-relaxed"
                     >
-                        I’m currently pursuing a master’s in data science at NJIT, where I’m
-                        building on my experience in analytics through statistics and machine
-                        learning. I’m interested in roles where I can investigate business
-                        questions, develop useful models, and communicate findings that help
-                        teams make better decisions.
+                        As a member of ColorStack Baruch Chapter, I’ve strengthened my teamwork and leadership skills while advocating for diversity in tech.
+                        I’m driven by curiosity, collaboration, and a desire to grow within the corporate world — where I can contribute to innovative projects, enhance business intelligence, and build technology that makes an impact.
                     </motion.p>
 
                     {/* Download Button */}
@@ -128,7 +121,7 @@ export const About = () => {
                         download
                         className="py-3 px-8 text-white rounded-full font-semibold flex items-center justify-center gap-2 hover:opacity-90 transition-opacity duration-300 w-max bg-gradient-to-r from-blue-700 via-blue-800 to-blue-900"
                     >
-                        Download Resume
+                        Download CV
                         <HiDownload className="text-lg" />
                     </motion.a>
                 </div>
