@@ -1,0 +1,7 @@
+route,selected_method,validation_2024_wape,holdout_2025_wape,holdout_2025_baseline_wape,holdout_2025_bias_pct
+BOS-DCA,Seasonal growth,0.0825,0.2527,0.3082,0.2419
+BOS-LAX,Seasonal naive,0.0818,0.1146,0.1146,-0.0319
+BOS-MCO,Seasonal naive,0.0916,0.079,0.079,-0.048
+JFK-FLL,Seasonal growth,0.1582,0.0635,0.1042,0.0076
+JFK-LAX,Seasonal naive,0.1,0.0358,0.0358,0.0053
+JFK-MCO,Seasonal growth,0.1501,0.1054,0.0937,-0.0781

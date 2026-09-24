@@ -1,0 +1,25 @@
+route,month,forecast_passengers,scenario_low,scenario_high,prior_year_seats,seats_at_85pct,seat_gap_vs_prior_year,implied_load_factor_if_prior_seats,planning_flag,selected_method
+BOS-DCA,2026-05-01,18633,13924,23342,26140,21922,-4218,0.7128,Current reference capacity may suffice,Seasonal growth
+BOS-DCA,2026-06-01,16229,12128,20331,22182,19094,-3088,0.7316,Current reference capacity may suffice,Seasonal growth
+BOS-DCA,2026-07-01,14307,10691,17922,19180,16832,-2348,0.7459,Current reference capacity may suffice,Seasonal growth
+BOS-DCA,2026-08-01,14986,11198,18773,21039,17631,-3408,0.7123,Current reference capacity may suffice,Seasonal growth
+BOS-LAX,2026-05-01,22215,19669,24761,25455,26136,681,0.8727,Review additional capacity,Seasonal naive
+BOS-LAX,2026-06-01,22170,19630,24710,25454,26083,629,0.871,Review additional capacity,Seasonal naive
+BOS-LAX,2026-07-01,25501,22579,28423,28212,30002,1790,0.9039,Review additional capacity,Seasonal naive
+BOS-LAX,2026-08-01,23615,20909,26321,26718,27783,1065,0.8839,Review additional capacity,Seasonal naive
+BOS-MCO,2026-05-01,23088,21263,24913,28947,27163,-1784,0.7976,Current reference capacity may suffice,Seasonal naive
+BOS-MCO,2026-06-01,23758,21880,25636,27749,27951,202,0.8562,Review additional capacity,Seasonal naive
+BOS-MCO,2026-07-01,24334,22411,26257,27478,28629,1151,0.8856,Review additional capacity,Seasonal naive
+BOS-MCO,2026-08-01,23495,21638,25352,27844,27642,-202,0.8438,Current reference capacity may suffice,Seasonal naive
+JFK-FLL,2026-05-01,22947,21489,24404,29450,26996,-2454,0.7792,Current reference capacity may suffice,Seasonal growth
+JFK-FLL,2026-06-01,22512,21082,23942,29564,26485,-3079,0.7615,Current reference capacity may suffice,Seasonal growth
+JFK-FLL,2026-07-01,23568,22071,25065,26874,27728,854,0.877,Review additional capacity,Seasonal growth
+JFK-FLL,2026-08-01,23372,21887,24856,28936,27496,-1440,0.8077,Current reference capacity may suffice,Seasonal growth
+JFK-LAX,2026-05-01,34871,33621,36121,41320,41025,-295,0.8439,Current reference capacity may suffice,Seasonal naive
+JFK-LAX,2026-06-01,37427,36085,38769,46448,44032,-2416,0.8058,Current reference capacity may suffice,Seasonal naive
+JFK-LAX,2026-07-01,42698,41167,44229,50174,50233,59,0.851,Review additional capacity,Seasonal naive
+JFK-LAX,2026-08-01,39735,38311,41159,49619,46748,-2871,0.8008,Current reference capacity may suffice,Seasonal naive
+JFK-MCO,2026-05-01,30559,27339,33779,40828,35952,-4876,0.7485,Current reference capacity may suffice,Seasonal growth
+JFK-MCO,2026-06-01,30257,27069,33445,39018,35597,-3421,0.7755,Current reference capacity may suffice,Seasonal growth
+JFK-MCO,2026-07-01,33457,29931,36982,37193,39361,2168,0.8995,Review additional capacity,Seasonal growth
+JFK-MCO,2026-08-01,32405,28990,35820,39138,38124,-1014,0.828,Current reference capacity may suffice,Seasonal growth

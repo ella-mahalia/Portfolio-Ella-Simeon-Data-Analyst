@@ -6,13 +6,13 @@ export const Resume = () => {
     // Education array
     const educationData = [
         {
-            year: "2021 - 2025",
+            year: "August 2021 - May 2025",
             title: "Bachelor's of Business Administration in Computer Information Systems",
             institution: "CUNY Baruch, Zicklin School of Business",
             description: "Focused on the intersection of business and technology, with coursework in data analysis, information systems, and project management.",
         },
         {
-            year: "2025 - Present",
+            year: "January 2026 - Expected December 2026",
             title: "Masters in Data Science - Computational Track",
             institution: "New Jersey Institute of Technology",
             description: "Emphasizing advanced computational techniques, machine learning, and big data analytics to solve complex problems in various domains.",
@@ -26,6 +26,12 @@ export const Resume = () => {
             title: "Data Analyst",
             company: "New York Department of Transportation",
             description: "Designed and deployed interactive Power BI dashboards to track package locker usage, identifying peak hours, pickup durations, and borough-level trends. Developed custom DAX measures and optimized ETL workflows integrating data from multiple sources, including SOAP APIs, ensuring data accuracy and actionable insights. Implemented SQL upsert functions and managed Power BI Online datasets to improve query performance and streamline cross-team data accessibility."
+        },
+        {
+            year: "January 2026 - Present",
+            title: "IT Data Analyst",
+            company: "Metropolitan Transportation Authority (MTA)",
+            description: "Develop Power BI dashboards that give IT leaders and assignment group managers a clear view of open incidents, tasks, changes, problems, and strategic work. Build DAX measures to track backlog, aging, and items needing attention, and automate ServiceNow data refreshes through Power Automate and SharePoint."
         },
     ];
 

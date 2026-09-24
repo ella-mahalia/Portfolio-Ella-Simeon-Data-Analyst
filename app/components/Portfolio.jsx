@@ -7,6 +7,13 @@ export const Portfolio = () => {
   // Projects array
   const projects = [
     {
+      id: 5,
+      title: "Airline Analytics: Booking & Route Forecasting",
+      image: "/assets/airline-analytics-cover.png",
+      tags: ["A/B Testing", "Forecasting", "Python", "Power BI"],
+      link: "/airline_analytics-case-study/index.html",
+    },
+    {
       id: 1,
       title: "House Prediction ML Model",
       image: "assets/project-1.png",
@@ -34,6 +41,7 @@ export const Portfolio = () => {
       tags: ["Machine Learning", "Python", "Data Science"],
       link: "https://ellamahalia.pythonanywhere.com/heart_attack",
     },
+    
   ];
 
   // Animation variants

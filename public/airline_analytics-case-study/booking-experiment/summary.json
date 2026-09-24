@@ -1,0 +1,31 @@
+{
+  "source": "SIMULATED DATA \u2014 illustrative portfolio case; no JetBlue customer data",
+  "experiment": "Redesigned flight selection experience",
+  "primary_metric": "Booking completed / assigned session",
+  "arms": {
+    "Control": {
+      "sessions": 12000,
+      "selected": 6554,
+      "checkout": 3649,
+      "bookings": 988,
+      "revenue": 308768.18
+    },
+    "Treatment": {
+      "sessions": 12000,
+      "selected": 6924,
+      "checkout": 3853,
+      "bookings": 1047,
+      "revenue": 327255.06
+    }
+  },
+  "absolute_lift": 0.004917,
+  "relative_lift": 0.059717,
+  "z_statistic": 1.3671,
+  "two_sided_p_value": 0.171585,
+  "difference_95pct_ci": [
+    -0.002132,
+    0.011965
+  ],
+  "significant_at_5pct": false,
+  "interpretation": "Illustrative only. Do not claim a real JetBlue result."
+}
