@@ -1,503 +1,354 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { PiStarFourFill } from "react-icons/pi";
 import {
-  HiArrowLeft,
-  HiArrowRight,
   HiArrowUpRight,
   HiLockClosed,
 } from "react-icons/hi2";
-import { motion } from "framer-motion";
 
 export const Portfolio = () => {
   const projects = [
-  {
-    id: 1,
-    title: "Airline Analytics: Booking & Route Forecasting",
-    image: "/assets/airline-analytics-cover.png",
-    imagePosition: "center 20%",
-    tags: [
-      "A/B Testing",
-      "Forecasting",
-      "Python",
-      "Power BI",
-    ],
-    link: "/airline_analytics-case-study/index.html",
-  },
+    {
+      id: 1,
+      title: "Airline Analytics: Booking & Route Forecasting",
+      shortTitle: "Airline Analytics",
+      subtitle: "Booking & Route Forecasting",
+      image: "/assets/airline-analytics-cover.png",
+      imagePosition: "center 20%",
+      tags: [
+        "A/B Testing",
+        "Forecasting",
+        "Python",
+        "Power BI",
+      ],
+      description:
+        "Analyzed airline booking behavior, route demand, traffic trends, seat capacity, departures, and load factors to uncover seasonal patterns and support data-driven planning. The project combines A/B testing, forecasting, and interactive analytics.",
+      link: "/airline_analytics-case-study/index.html",
+      type: "Featured Case Study",
+    },
 
-  {
-    id: 2,
-    title: "Retail Demand Forecasting & Store Performance",
-    image: "/assets/project-7.png",
-    imagePosition: "center 30%",
-    tags: [
-      "Time Series",
-      "Forecasting",
-      "Python",
-      "SQL",
-      "Data Visualization",
-    ],
-    link: "/retail-demand-forecast/index.html",
-  },
+    {
+      id: 2,
+      title: "Retail Demand Forecasting & Store Performance",
+      shortTitle: "Retail Demand Forecasting",
+      subtitle: "Store Performance & Sales Analysis",
+      image: "/assets/project-7.png",
+      imagePosition: "center 30%",
+      tags: [
+        "Time Series",
+        "Forecasting",
+        "Python",
+        "SQL",
+        "Data Visualization",
+      ],
+      description:
+        "Explored Walmart store and department sales to identify demand patterns, holiday effects, seasonality, and store performance differences. Built forecasting baselines and an interactive analytics experience using real retail data.",
+      link: "/retail-demand-forecast/index.html",
+      type: "Case Study",
+    },
 
-  {
-  id: 3,
-  title: "Customer Churn Prediction & Retention Modeling",
-  image: "/assets/customer-churn.png",
-  imagePosition: "center center",
-  tags: [
-    "Machine Learning",
-    "Classification",
-    "Python",
-    "scikit-learn",
-  ],
-  link: "https://customer-churn-retention-model.vercel.app/",
-  },
+    {
+      id: 3,
+      title: "Customer Churn Prediction & Retention Modeling",
+      shortTitle: "Customer Churn Prediction",
+      subtitle: "Machine Learning & Retention",
+      image: "/assets/customer-churn.png",
+      imagePosition: "center center",
+      tags: [
+        "Machine Learning",
+        "Classification",
+        "Python",
+        "scikit-learn",
+      ],
+      description:
+        "Built and deployed a machine learning model using IBM Telco customer data to identify customers with elevated churn risk. The project evaluates classification performance and translates model results into retention-focused insights.",
+      link: "https://customer-churn-retention-model.vercel.app/",
+      type: "Deployed ML Project",
+    },
 
-  {
-    id: 4,
-    title: "Subway Ridership Forecast & Station Trends",
-    image: "/subway-ridership-forecast/cover.png",
-    imagePosition: "center center",
-    tags: [
-      "Public MTA Data",
-      "Time Series",
-      "Forecasting",
-      "Python",
-    ],
-    link: "/subway-ridership-forecast/index.html",
-  },
+    {
+      id: 4,
+      title: "Subway Ridership Forecast & Station Trends",
+      shortTitle: "Subway Ridership Forecasting",
+      subtitle: "Time Series & Station Trends",
+      image: "/subway-ridership-forecast/cover.png",
+      imagePosition: "center center",
+      tags: [
+        "Public MTA Data",
+        "Time Series",
+        "Forecasting",
+        "Python",
+      ],
+      description:
+        "Analyzed public subway ridership data to uncover station-level trends, changes in demand, and recurring ridership patterns. Forecasting techniques were used to explore future ridership behavior and system trends.",
+      link: "/subway-ridership-forecast/index.html",
+      type: "Case Study",
+    },
 
-  {
-    id: 5,
-    title: "Package Locker Utilization Dashboard",
-    image: "/assets/project-2.png",
-    imagePosition: "center center",
-    tags: [
-      "Data Analytics",
-      "Power BI",
-      "SQL",
-      "ETL",
-      "Dashboard Design",
-    ],
-  },
+    {
+      id: 5,
+      title: "Package Locker Utilization Dashboard",
+      shortTitle: "Package Locker Dashboard",
+      subtitle: "Operational Analytics",
+      image: "/assets/project-2.png",
+      imagePosition: "center center",
+      tags: [
+        "Data Analytics",
+        "Power BI",
+        "SQL",
+        "ETL",
+        "Dashboard Design",
+      ],
+      description:
+        "Developed an operational analytics dashboard focused on package locker utilization, combining data preparation, SQL, ETL processes, KPI development, and dashboard design to support performance monitoring.",
+      type: "Professional Project",
+    },
 
-  {
-    id: 6,
-    title: "Loyalty Program Impact Analysis",
-    image: "/assets/project-3.png",
-    imagePosition: "center 20%",
-    tags: [
-      "Data Analytics",
-      "Customer Segmentation",
-      "A/B Testing",
-      "Power BI",
-    ],
-  },
-];
+    {
+      id: 6,
+      title: "Loyalty Program Impact Analysis",
+      shortTitle: "Loyalty Program Analysis",
+      subtitle: "Segmentation & Experimentation",
+      image: "/assets/project-3.png",
+      imagePosition: "center 20%",
+      tags: [
+        "Data Analytics",
+        "Customer Segmentation",
+        "A/B Testing",
+        "Power BI",
+      ],
+      description:
+        "Evaluated customer behavior and loyalty program performance using segmentation and experimentation techniques to understand differences in engagement and measure business impact.",
+      type: "Analytics Project",
+    },
+  ];
 
-  const trackRef = useRef(null);
+  const [activeProjectId, setActiveProjectId] = useState(1);
 
-  const [currentPage, setCurrentPage] = useState(0);
-  const [cardsPerPage, setCardsPerPage] = useState(2);
-
-  /* ======================================================
-     RESPONSIVE CARDS PER PAGE
-  ====================================================== */
-
-  useEffect(() => {
-    const updateCardsPerPage = () => {
-      if (window.innerWidth <= 768) {
-        setCardsPerPage(1);
-      } else {
-        setCardsPerPage(2);
-      }
-    };
-
-    updateCardsPerPage();
-
-    window.addEventListener("resize", updateCardsPerPage);
-
-    return () => {
-      window.removeEventListener("resize", updateCardsPerPage);
-    };
-  }, []);
-
-  const totalPages = Math.ceil(
-    projects.length / cardsPerPage
-  );
-
-  /* ======================================================
-     GET ONE CARD WIDTH + GAP
-  ====================================================== */
-
-  const getCardStep = () => {
-    const track = trackRef.current;
-
-    if (!track) return 0;
-
-    const card = track.querySelector(
-      ".portfolio-slider-card"
-    );
-
-    if (!card) return 0;
-
-    const styles =
-      window.getComputedStyle(track);
-
-    const gap = parseFloat(
-      styles.columnGap ||
-        styles.gap ||
-        "0"
-    );
-
-    return card.offsetWidth + gap;
-  };
-
-  /* ======================================================
-     SCROLL TO PAGE
-  ====================================================== */
-
-  const scrollToPage = (page) => {
-    const track = trackRef.current;
-
-    if (!track) return;
-
-    const cardStep = getCardStep();
-
-    if (!cardStep) return;
-
-    const safePage = Math.max(
-      0,
-      Math.min(page, totalPages - 1)
-    );
-
-    track.scrollTo({
-      left:
-        safePage *
-        cardsPerPage *
-        cardStep,
-
-      behavior: "smooth",
-    });
-
-    setCurrentPage(safePage);
-  };
-
-  /* ======================================================
-     ARROW CONTROLS
-  ====================================================== */
-
-  const scrollProjects = (direction) => {
-    if (direction === "next") {
-      scrollToPage(currentPage + 1);
-    } else {
-      scrollToPage(currentPage - 1);
-    }
-  };
-
-  /* ======================================================
-     UPDATE PAGE WHEN USER SCROLLS
-  ====================================================== */
-
-  useEffect(() => {
-    const track = trackRef.current;
-
-    if (!track) return;
-
-    const handleScroll = () => {
-      const cardStep = getCardStep();
-
-      if (!cardStep) return;
-
-      const pageWidth =
-        cardStep * cardsPerPage;
-
-      const page = Math.round(
-        track.scrollLeft / pageWidth
-      );
-
-      setCurrentPage(
-        Math.max(
-          0,
-          Math.min(
-            page,
-            totalPages - 1
-          )
-        )
-      );
-    };
-
-    track.addEventListener(
-      "scroll",
-      handleScroll,
-      {
-        passive: true,
-      }
-    );
-
-    return () => {
-      track.removeEventListener(
-        "scroll",
-        handleScroll
-      );
-    };
-  }, [
-    cardsPerPage,
-    totalPages,
-  ]);
-
-  /* ======================================================
-     PAGE DISPLAY VALUES
-  ====================================================== */
-
-  const firstVisibleProject =
-    currentPage * cardsPerPage + 1;
-
-  const lastVisibleProject =
-    Math.min(
-      firstVisibleProject +
-        cardsPerPage -
-        1,
-      projects.length
-    );
-
-  const progress =
-    ((currentPage + 1) /
-      totalPages) *
-    100;
+  const activeProject =
+    projects.find((project) => project.id === activeProjectId) ||
+    projects[0];
 
   return (
     <section
       id="portfolio"
-      className="portfolio-slider-section"
+      className="selected-work-section"
     >
-      {/* =====================================================
+      {/* ================================
           HEADER
-      ===================================================== */}
-
+      ================================= */}
       <motion.div
-        className="portfolio-slider-header"
-        initial={{
-          opacity: 0,
-          y: 25,
-        }}
-        whileInView={{
-          opacity: 1,
-          y: 0,
-        }}
-        viewport={{
-          once: true,
-          amount: 0.25,
-        }}
-        transition={{
-          duration: 0.65,
-        }}
+        className="selected-work-header"
+        initial={{ opacity: 0, y: 25 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.25 }}
+        transition={{ duration: 0.65 }}
       >
-        <div className="portfolio-slider-heading-wrap">
-          <p className="portfolio-slider-badge">
-            <PiStarFourFill />
-            Portfolio
-          </p>
+        <p className="selected-work-badge">
+          <span className="selected-work-badge-line" />
+          <PiStarFourFill />
+          Portfolio
+        </p>
 
-          <h2 className="portfolio-slider-title">
-            Check out my featured projects
-          </h2>
-        </div>
+        <h2 className="selected-work-title">
+          Selected <span>Work</span>
+        </h2>
 
-        <div className="portfolio-slider-controls">
-          <button
-            type="button"
-            className="portfolio-slider-arrow portfolio-slider-arrow-prev"
-            onClick={() =>
-              scrollProjects("prev")
-            }
-            aria-label="Previous projects"
-            disabled={currentPage === 0}
-          >
-            <HiArrowLeft />
-          </button>
-
-          <button
-            type="button"
-            className="portfolio-slider-arrow portfolio-slider-arrow-next"
-            onClick={() =>
-              scrollProjects("next")
-            }
-            aria-label="Next projects"
-            disabled={
-              currentPage ===
-              totalPages - 1
-            }
-          >
-            <HiArrowRight />
-          </button>
-        </div>
+        <p className="selected-work-intro">
+          A selection of analytics, machine learning, and
+          forecasting projects built around real-world business
+          questions.
+        </p>
       </motion.div>
 
-      {/* =====================================================
-          PROJECT CAROUSEL
-      ===================================================== */}
-
-      <motion.div
-        ref={trackRef}
-        className="portfolio-slider-track"
-        initial={{
-          opacity: 0,
-          y: 35,
-        }}
-        whileInView={{
-          opacity: 1,
-          y: 0,
-        }}
-        viewport={{
-          once: true,
-          amount: 0.15,
-        }}
-        transition={{
-          duration: 0.7,
-          delay: 0.08,
-        }}
-      >
-        {projects.map((project) => (
-          <motion.article
-            key={project.id}
-            className="portfolio-slider-card"
-            whileHover={{
-              y: -6,
-            }}
-            transition={{
-              duration: 0.25,
-            }}
-          >
-            {/* IMAGE */}
-
-            <div className="portfolio-slider-image-wrap">
-              <img
-                src={project.image}
-                alt={project.title}
-                className="portfolio-slider-image"
+      {/* ================================
+          MAIN FEATURE AREA
+      ================================= */}
+      <div className="selected-work-layout">
+        {/* LEFT SIDE */}
+        <motion.div
+          className="selected-work-feature"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.15 }}
+          transition={{ duration: 0.7 }}
+        >
+          {/* IMAGE */}
+          <div className="selected-work-image-shell">
+            <AnimatePresence mode="wait">
+              <motion.img
+                key={activeProject.id}
+                src={activeProject.image}
+                alt={activeProject.title}
+                className="selected-work-image"
                 style={{
                   objectPosition:
-                    project.imagePosition,
+                    activeProject.imagePosition,
+                }}
+                initial={{
+                  opacity: 0,
+                  scale: 1.025,
+                }}
+                animate={{
+                  opacity: 1,
+                  scale: 1,
+                }}
+                exit={{
+                  opacity: 0,
+                  scale: 0.985,
+                }}
+                transition={{
+                  duration: 0.4,
+                  ease: "easeOut",
                 }}
               />
+            </AnimatePresence>
 
-              <div
-                className="portfolio-slider-image-shade"
-                aria-hidden="true"
-              />
+            <div className="selected-work-image-overlay" />
+
+            <div className="selected-work-image-number">
+              {String(activeProject.id).padStart(2, "0")}
             </div>
+          </div>
 
-            {/* CONTENT */}
-
-            <div className="portfolio-slider-info">
-              <div className="portfolio-slider-tags">
-                {project.tags.map(
-                  (tagText) => (
-                    <span
-                      key={tagText}
-                      className="portfolio-slider-tag"
-                    >
-                      {tagText}
-                    </span>
-                  )
-                )}
+          {/* PROJECT DETAILS */}
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={`details-${activeProject.id}`}
+              className="selected-work-details"
+              initial={{
+                opacity: 0,
+                y: 12,
+              }}
+              animate={{
+                opacity: 1,
+                y: 0,
+              }}
+              exit={{
+                opacity: 0,
+                y: -8,
+              }}
+              transition={{
+                duration: 0.35,
+              }}
+            >
+              <div className="selected-work-type">
+                <span className="selected-work-type-dot" />
+                {activeProject.type}
               </div>
 
-              <div className="portfolio-slider-card-bottom">
-                <h3 className="portfolio-slider-card-title">
-                  {project.title}
-                </h3>
+              <h3 className="selected-work-project-title">
+                {activeProject.title}
+              </h3>
 
-                {project.link ? (
+              <p className="selected-work-description">
+                {activeProject.description}
+              </p>
+
+              <div className="selected-work-bottom">
+                <div className="selected-work-tags">
+                  {activeProject.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="selected-work-tag"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+
+                {activeProject.link ? (
                   <a
-                    href={project.link}
+                    href={activeProject.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="portfolio-slider-project-link"
-                    aria-label={`View ${project.title}`}
-                    title="View project"
+                    className="selected-work-cta"
                   >
+                    View Case Study
                     <HiArrowUpRight />
                   </a>
                 ) : (
-                  <div
-                    className="portfolio-slider-project-link portfolio-slider-project-private"
-                    title="Private project (company-owned)"
-                    aria-label="Private project"
-                  >
+                  <div className="selected-work-private">
                     <HiLockClosed />
+                    Private Project
                   </div>
                 )}
               </div>
-            </div>
-          </motion.article>
-        ))}
-      </motion.div>
+            </motion.div>
+          </AnimatePresence>
+        </motion.div>
 
-      {/* =====================================================
-          COUNTER + PROGRESS
-      ===================================================== */}
+        {/* ================================
+            RIGHT PROJECT INDEX
+        ================================= */}
+        <motion.div
+          className="selected-work-index"
+          initial={{ opacity: 0, x: 30 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, amount: 0.15 }}
+          transition={{
+            duration: 0.7,
+            delay: 0.08,
+          }}
+        >
+          {projects.map((project) => {
+            const isActive =
+              activeProject.id === project.id;
 
-      <motion.div
-        className="portfolio-slider-progress-row"
-        initial={{
-          opacity: 0,
-        }}
-        whileInView={{
-          opacity: 1,
-        }}
-        viewport={{
-          once: true,
-        }}
-        transition={{
-          duration: 0.7,
-          delay: 0.2,
-        }}
-      >
-        <div className="portfolio-slider-count">
-          <span className="portfolio-slider-current">
-            {String(
-              firstVisibleProject
-            ).padStart(2, "0")}
-          </span>
+            return (
+              <button
+                type="button"
+                key={project.id}
+                className={`selected-work-index-item ${
+                  isActive ? "is-active" : ""
+                }`}
+                onClick={() =>
+                  setActiveProjectId(project.id)
+                }
+                onMouseEnter={() =>
+                  setActiveProjectId(project.id)
+                }
+                aria-pressed={isActive}
+              >
+                <div className="selected-work-index-thumb-wrap">
+                  <img
+                    src={project.image}
+                    alt=""
+                    className="selected-work-index-thumb"
+                    style={{
+                      objectPosition:
+                        project.imagePosition,
+                    }}
+                  />
+                </div>
 
-          {cardsPerPage > 1 && (
-            <>
-              <span className="portfolio-slider-range">
-                –
-              </span>
+                <div className="selected-work-index-copy">
+                  <span className="selected-work-index-number">
+                    {String(project.id).padStart(
+                      2,
+                      "0"
+                    )}
+                  </span>
 
-              <span className="portfolio-slider-current">
-                {String(
-                  lastVisibleProject
-                ).padStart(2, "0")}
-              </span>
-            </>
-          )}
+                  <strong>
+                    {project.shortTitle}
+                  </strong>
 
-          <span className="portfolio-slider-slash">
-            /
-          </span>
+                  <span className="selected-work-index-subtitle">
+                    {project.subtitle}
+                  </span>
+                </div>
 
-          <span className="portfolio-slider-total">
-            {String(
-              projects.length
-            ).padStart(2, "0")}
-          </span>
-        </div>
-
-        <div className="portfolio-slider-progress">
-          <div
-            className="portfolio-slider-progress-fill"
-            style={{
-              width: `${progress}%`,
-            }}
-          />
-        </div>
-      </motion.div>
+                <span className="selected-work-index-arrow">
+                  <HiArrowUpRight />
+                </span>
+              </button>
+            );
+          })}
+        </motion.div>
+      </div>
     </section>
   );
 };
