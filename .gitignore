@@ -39,3 +39,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Local Walmart source data
+public/retail-demand-forecast/data/raw/*.csv

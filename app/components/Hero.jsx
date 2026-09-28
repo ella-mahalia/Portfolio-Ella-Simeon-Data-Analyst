@@ -232,7 +232,7 @@ export const Hero = () => {
                 scale: 0.98,
               }}
             >
-              <span>Download résumé</span>
+              <span>Download resume</span>
 
               <HiDownload
                 aria-hidden="true"

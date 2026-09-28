@@ -47,7 +47,7 @@ html[data-theme="light"] {
 @layer base {
   html {
     scroll-behavior: smooth;
-    scroll-padding-top: 90px;
+    scroll-padding-top: 120px;
   }
 
   body {
@@ -1446,10 +1446,10 @@ html[data-theme="light"]
 .portfolio-slider-section {
   position: relative;
   width: 100%;
-  scroll-margin-top: 96px;
+  scroll-margin-top: 120px;
 
   padding:
-    150px
+    210px
     clamp(32px, 4vw, 70px)
     90px;
 
@@ -1467,7 +1467,7 @@ html[data-theme="light"]
 
   gap: 40px;
 
-  margin-bottom: 42px;
+  margin-bottom: 34px;
 }
 
 .portfolio-slider-heading-wrap {
@@ -1485,7 +1485,7 @@ html[data-theme="light"]
 .portfolio-slider-badge {
   width: fit-content;
 
-  margin: 0 0 18px;
+  margin: 0 0 14px;
   padding: 0;
 
   display: inline-flex;
@@ -1530,7 +1530,7 @@ html[data-theme="light"]
 ========================================================= */
 
 .portfolio-slider-title {
-  max-width: 900px;
+  max-width: 760px;
 
   margin: 0;
 
@@ -1538,16 +1538,16 @@ html[data-theme="light"]
 
   font-size:
     clamp(
-      2.7rem,
-      4.1vw,
-      4.5rem
+      2.25rem,
+      3.15vw,
+      3.65rem
     );
 
-  line-height: 0.98;
+  line-height: 1;
 
   font-weight: 800;
 
-  letter-spacing: -0.06em;
+  letter-spacing: -0.055em;
 }
 
 html[data-theme="light"] .portfolio-slider-title {
@@ -1644,6 +1644,13 @@ html[data-theme="light"] .portfolio-slider-badge {
     rgba(231, 100, 159, 0.36);
 }
 
+.portfolio-slider-arrow:disabled {
+  opacity: 0.35;
+  cursor: default;
+  transform: none;
+  box-shadow: none;
+}
+
 /* =========================================================
    CAROUSEL TRACK
 ========================================================= */
@@ -1682,17 +1689,16 @@ html[data-theme="light"] .portfolio-slider-badge {
   position: relative;
 
   flex:
-    0
-    0
+    0 0
     calc((100% - 24px) / 2);
 
   min-width: 0;
 
   height:
     clamp(
-      390px,
-      31vw,
-      500px
+      350px,
+      27vw,
+      430px
     );
 
   scroll-snap-align: start;
@@ -1748,16 +1754,30 @@ html[data-theme="light"] .portfolio-slider-badge {
   position: absolute;
   inset: 0;
 
+  width: 100%;
+  height: 100%;
+
   overflow: hidden;
 }
 
 .portfolio-slider-image {
-  width: 100%;
-  height: 100%;
+  position: absolute;
+
+  top: 50%;
+  left: 50%;
+
+  width: 92%;
+  height: 92%;
 
   display: block;
 
   object-fit: cover;
+  object-position: center center;
+
+  border-radius: 18px;
+
+  transform:
+    translate(-50%, -50%);
 
   transition:
     transform 0.55s ease;
@@ -1765,7 +1785,9 @@ html[data-theme="light"] .portfolio-slider-badge {
 
 .portfolio-slider-card:hover
   .portfolio-slider-image {
-  transform: scale(1.035);
+  transform:
+    translate(-50%, -50%)
+    scale(1.025);
 }
 
 .portfolio-slider-image-shade {
@@ -1775,10 +1797,10 @@ html[data-theme="light"] .portfolio-slider-badge {
   background:
     linear-gradient(
       to bottom,
-      transparent 42%,
-      rgba(7, 7, 10, 0.15) 56%,
-      rgba(7, 7, 10, 0.7) 78%,
-      rgba(7, 7, 10, 0.98) 100%
+      rgba(7, 7, 10, 0) 32%,
+      rgba(7, 7, 10, 0.08) 52%,
+      rgba(7, 7, 10, 0.48) 72%,
+      rgba(7, 7, 10, 0.92) 100%
     );
 
   pointer-events: none;
@@ -1797,29 +1819,29 @@ html[data-theme="light"] .portfolio-slider-badge {
 
   z-index: 5;
 
-  min-height: 150px;
+  min-height: 135px;
 
   padding:
+    18px
     20px
-    26px
-    23px;
+    20px;
 
   background:
     linear-gradient(
       180deg,
-      rgba(13, 13, 17, 0.45),
-      rgba(12, 12, 16, 0.94)
+      rgba(10, 10, 14, 0.06),
+      rgba(10, 10, 14, 0.78)
     );
 
   border-top:
     1px solid
-    rgba(255, 255, 255, 0.07);
+    rgba(255, 255, 255, 0.045);
 
   backdrop-filter:
-    blur(18px);
+    blur(8px);
 
   -webkit-backdrop-filter:
-    blur(18px);
+    blur(8px);
 }
 
 /* =========================================================
@@ -1873,7 +1895,7 @@ html[data-theme="light"] .portfolio-slider-badge {
 }
 
 .portfolio-slider-card-title {
-  max-width: 82%;
+  max-width: 84%;
 
   margin: 0;
 
@@ -1881,16 +1903,16 @@ html[data-theme="light"] .portfolio-slider-badge {
 
   font-size:
     clamp(
-      1.4rem,
-      1.8vw,
-      2rem
+      1.2rem,
+      1.5vw,
+      1.55rem
     );
 
-  line-height: 1.08;
+  line-height: 1.1;
 
   font-weight: 700;
 
-  letter-spacing: -0.04em;
+  letter-spacing: -0.035em;
 }
 
 /* =========================================================
@@ -1898,8 +1920,8 @@ html[data-theme="light"] .portfolio-slider-badge {
 ========================================================= */
 
 .portfolio-slider-project-link {
-  width: 58px;
-  height: 58px;
+  width: 48px;
+  height: 48px;
 
   flex: none;
 
@@ -1918,7 +1940,7 @@ html[data-theme="light"] .portfolio-slider-badge {
 
   border-radius: 50%;
 
-  font-size: 1.5rem;
+  font-size: 1.25rem;
 }
 
 .portfolio-slider-project-link:hover {
@@ -1973,7 +1995,7 @@ html[data-theme="light"] .portfolio-slider-badge {
 }
 
 .portfolio-slider-count {
-  min-width: 90px;
+  min-width: 132px;
 
   flex: none;
 
@@ -1982,7 +2004,7 @@ html[data-theme="light"] .portfolio-slider-badge {
 
   gap: 6px;
 
-  font-size: 1.05rem;
+  font-size: 1rem;
 
   font-weight: 600;
 
@@ -1993,6 +2015,10 @@ html[data-theme="light"] .portfolio-slider-badge {
 .portfolio-slider-current {
   color:
     var(--color-primary);
+}
+
+.portfolio-slider-range {
+  color: var(--color-content-alter);
 }
 
 .portfolio-slider-slash,
@@ -2088,7 +2114,7 @@ html[data-theme="light"]
 @media (max-width: 1050px) {
   .portfolio-slider-section {
     padding:
-      135px
+      170px
       30px
       80px;
   }
@@ -2096,9 +2122,9 @@ html[data-theme="light"]
   .portfolio-slider-title {
     font-size:
       clamp(
-        2.6rem,
-        5.2vw,
-        4rem
+        2.15rem,
+        4.2vw,
+        3.25rem
       );
   }
 
@@ -2112,32 +2138,32 @@ html[data-theme="light"]
       0
       calc((100% - 20px) / 2);
 
-    height: 440px;
+    height: 390px;
   }
 
   .portfolio-slider-info {
-    min-height: 145px;
+    min-height: 130px;
 
     padding:
+      17px
       18px
-      22px
-      21px;
+      19px;
   }
 
   .portfolio-slider-card-title {
     font-size:
       clamp(
-        1.3rem,
-        2vw,
-        1.75rem
+        1.15rem,
+        1.8vw,
+        1.45rem
       );
   }
 
   .portfolio-slider-project-link {
-    width: 54px;
-    height: 54px;
+    width: 46px;
+    height: 46px;
 
-    font-size: 1.35rem;
+    font-size: 1.2rem;
   }
 }
 
@@ -2148,7 +2174,7 @@ html[data-theme="light"]
 @media (max-width: 768px) {
   .portfolio-slider-section {
     padding:
-      110px
+      145px
       20px
       60px;
   }
@@ -2166,9 +2192,9 @@ html[data-theme="light"]
   .portfolio-slider-title {
     font-size:
       clamp(
-        2.4rem,
-        10vw,
-        3.8rem
+        2rem,
+        8vw,
+        2.8rem
       );
   }
 
@@ -2193,18 +2219,18 @@ html[data-theme="light"]
       0
       86vw;
 
-    height: 480px;
+    height: 430px;
 
     border-radius: 22px;
   }
 
   .portfolio-slider-info {
-    min-height: 165px;
+    min-height: 145px;
 
     padding:
-      20px
-      20px
-      22px;
+      18px
+      18px
+      20px;
   }
 
   .portfolio-slider-tag {
@@ -2216,21 +2242,21 @@ html[data-theme="light"]
   }
 
   .portfolio-slider-card-title {
-    max-width: 78%;
+    max-width: 80%;
 
     font-size:
       clamp(
-        1.3rem,
-        5.4vw,
-        1.8rem
+        1.15rem,
+        4.8vw,
+        1.5rem
       );
   }
 
   .portfolio-slider-project-link {
-    width: 54px;
-    height: 54px;
+    width: 46px;
+    height: 46px;
 
-    font-size: 1.3rem;
+    font-size: 1.2rem;
   }
 
   .portfolio-slider-progress-row {
@@ -2245,7 +2271,7 @@ html[data-theme="light"]
 @media (max-width: 480px) {
   .portfolio-slider-section {
     padding:
-      105px
+      135px
       16px
       52px;
   }
@@ -2256,7 +2282,7 @@ html[data-theme="light"]
       0
       90vw;
 
-    height: 455px;
+    height: 410px;
   }
 
   .portfolio-slider-info {
@@ -2277,9 +2303,9 @@ html[data-theme="light"]
   }
 
   .portfolio-slider-count {
-    min-width: 76px;
+    min-width: 116px;
 
-    font-size: 0.92rem;
+    font-size: 0.88rem;
   }
 }
 

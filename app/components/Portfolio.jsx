@@ -12,105 +12,193 @@ import { motion } from "framer-motion";
 
 export const Portfolio = () => {
   const projects = [
-    {
-      id: 5,
-      title: "Airline Analytics: Booking & Route Forecasting",
-      image: "/assets/airline-analytics-cover.png",
-      tags: ["A/B Testing", "Forecasting", "Python", "Power BI"],
-      link: "/airline_analytics-case-study/index.html",
-    },
-    {
-      id: 1,
-      title: "House Prediction ML Model",
-      image: "/assets/project-1.png",
-      tags: ["Machine Learning", "Regression Analysis"],
-      link: "https://ellamahalia.pythonanywhere.com/house_price_prediction",
-    },
-    {
-      id: 2,
-      title: "Package Locker Utilization Dashboard",
-      image: "/assets/project-2.png",
-      tags: [
-        "Data Analytics",
-        "Power BI",
-        "SQL",
-        "ETL",
-        "Dashboard Design",
-      ],
-    },
-    {
-      id: 3,
-      title: "Loyalty Program Impact Analysis",
-      image: "/assets/project-3.png",
-      tags: [
-        "Data Analytics",
-        "Customer Segmentation",
-        "A/B Testing",
-        "Power BI",
-      ],
-    },
-    {
-      id: 4,
-      title: "Heart Attack Classification Model",
-      image: "/assets/project-4.png",
-      tags: ["Machine Learning", "Python", "Data Science"],
-      link: "https://ellamahalia.pythonanywhere.com/heart_attack",
-    },
-    {
-      id: 6,
-      title: "Subway Ridership Forecast & Station Trends",
-      image: "/subway-ridership-forecast/cover.png",
-      tags: [
-        "Public MTA Data",
-        "Time Series",
-        "Forecasting",
-        "Python",
-      ],
-      link: "/subway-ridership-forecast/index.html",
-    },
-  ];
+  {
+    id: 1,
+    title: "Airline Analytics: Booking & Route Forecasting",
+    image: "/assets/airline-analytics-cover.png",
+    imagePosition: "center 20%",
+    tags: [
+      "A/B Testing",
+      "Forecasting",
+      "Python",
+      "Power BI",
+    ],
+    link: "/airline_analytics-case-study/index.html",
+  },
+
+  {
+    id: 2,
+    title: "Retail Demand Forecasting & Store Performance",
+    image: "/assets/project-7.png",
+    imagePosition: "center 30%",
+    tags: [
+      "Time Series",
+      "Forecasting",
+      "Python",
+      "SQL",
+      "Data Visualization",
+    ],
+    link: "/retail-demand-forecast/index.html",
+  },
+
+  {
+  id: 3,
+  title: "Customer Churn Prediction & Retention Modeling",
+  image: "/assets/customer-churn.png",
+  imagePosition: "center center",
+  tags: [
+    "Machine Learning",
+    "Classification",
+    "Python",
+    "scikit-learn",
+  ],
+  link: "https://customer-churn-retention-model.vercel.app/",
+  },
+
+  {
+    id: 4,
+    title: "Subway Ridership Forecast & Station Trends",
+    image: "/subway-ridership-forecast/cover.png",
+    imagePosition: "center center",
+    tags: [
+      "Public MTA Data",
+      "Time Series",
+      "Forecasting",
+      "Python",
+    ],
+    link: "/subway-ridership-forecast/index.html",
+  },
+
+  {
+    id: 5,
+    title: "Package Locker Utilization Dashboard",
+    image: "/assets/project-2.png",
+    imagePosition: "center center",
+    tags: [
+      "Data Analytics",
+      "Power BI",
+      "SQL",
+      "ETL",
+      "Dashboard Design",
+    ],
+  },
+
+  {
+    id: 6,
+    title: "Loyalty Program Impact Analysis",
+    image: "/assets/project-3.png",
+    imagePosition: "center 20%",
+    tags: [
+      "Data Analytics",
+      "Customer Segmentation",
+      "A/B Testing",
+      "Power BI",
+    ],
+  },
+];
 
   const trackRef = useRef(null);
-  const [activeIndex, setActiveIndex] = useState(0);
+
+  const [currentPage, setCurrentPage] = useState(0);
+  const [cardsPerPage, setCardsPerPage] = useState(2);
 
   /* ======================================================
-      GET CARD WIDTH + GAP
+     RESPONSIVE CARDS PER PAGE
   ====================================================== */
 
-  const getScrollAmount = () => {
+  useEffect(() => {
+    const updateCardsPerPage = () => {
+      if (window.innerWidth <= 768) {
+        setCardsPerPage(1);
+      } else {
+        setCardsPerPage(2);
+      }
+    };
+
+    updateCardsPerPage();
+
+    window.addEventListener("resize", updateCardsPerPage);
+
+    return () => {
+      window.removeEventListener("resize", updateCardsPerPage);
+    };
+  }, []);
+
+  const totalPages = Math.ceil(
+    projects.length / cardsPerPage
+  );
+
+  /* ======================================================
+     GET ONE CARD WIDTH + GAP
+  ====================================================== */
+
+  const getCardStep = () => {
     const track = trackRef.current;
 
     if (!track) return 0;
 
-    const card = track.querySelector(".portfolio-slider-card");
+    const card = track.querySelector(
+      ".portfolio-slider-card"
+    );
 
     if (!card) return 0;
 
-    const styles = window.getComputedStyle(track);
-    const gap = parseFloat(styles.columnGap || styles.gap || 0);
+    const styles =
+      window.getComputedStyle(track);
+
+    const gap = parseFloat(
+      styles.columnGap ||
+        styles.gap ||
+        "0"
+    );
 
     return card.offsetWidth + gap;
   };
 
   /* ======================================================
-      ARROW CONTROLS
+     SCROLL TO PAGE
   ====================================================== */
 
-  const scrollProjects = (direction) => {
+  const scrollToPage = (page) => {
     const track = trackRef.current;
 
     if (!track) return;
 
-    const amount = getScrollAmount();
+    const cardStep = getCardStep();
 
-    track.scrollBy({
-      left: direction === "next" ? amount : -amount,
+    if (!cardStep) return;
+
+    const safePage = Math.max(
+      0,
+      Math.min(page, totalPages - 1)
+    );
+
+    track.scrollTo({
+      left:
+        safePage *
+        cardsPerPage *
+        cardStep,
+
       behavior: "smooth",
     });
+
+    setCurrentPage(safePage);
   };
 
   /* ======================================================
-      UPDATE ACTIVE PROJECT
+     ARROW CONTROLS
+  ====================================================== */
+
+  const scrollProjects = (direction) => {
+    if (direction === "next") {
+      scrollToPage(currentPage + 1);
+    } else {
+      scrollToPage(currentPage - 1);
+    }
+  };
+
+  /* ======================================================
+     UPDATE PAGE WHEN USER SCROLLS
   ====================================================== */
 
   useEffect(() => {
@@ -119,34 +207,66 @@ export const Portfolio = () => {
     if (!track) return;
 
     const handleScroll = () => {
-      const amount = getScrollAmount();
+      const cardStep = getCardStep();
 
-      if (!amount) return;
+      if (!cardStep) return;
 
-      const index = Math.round(track.scrollLeft / amount);
+      const pageWidth =
+        cardStep * cardsPerPage;
 
-      setActiveIndex(
+      const page = Math.round(
+        track.scrollLeft / pageWidth
+      );
+
+      setCurrentPage(
         Math.max(
           0,
-          Math.min(index, projects.length - 1)
+          Math.min(
+            page,
+            totalPages - 1
+          )
         )
       );
     };
 
-    track.addEventListener("scroll", handleScroll, {
-      passive: true,
-    });
-
-    window.addEventListener("resize", handleScroll);
+    track.addEventListener(
+      "scroll",
+      handleScroll,
+      {
+        passive: true,
+      }
+    );
 
     return () => {
-      track.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("resize", handleScroll);
+      track.removeEventListener(
+        "scroll",
+        handleScroll
+      );
     };
-  }, [projects.length]);
+  }, [
+    cardsPerPage,
+    totalPages,
+  ]);
+
+  /* ======================================================
+     PAGE DISPLAY VALUES
+  ====================================================== */
+
+  const firstVisibleProject =
+    currentPage * cardsPerPage + 1;
+
+  const lastVisibleProject =
+    Math.min(
+      firstVisibleProject +
+        cardsPerPage -
+        1,
+      projects.length
+    );
 
   const progress =
-    ((activeIndex + 1) / projects.length) * 100;
+    ((currentPage + 1) /
+      totalPages) *
+    100;
 
   return (
     <section
@@ -176,25 +296,25 @@ export const Portfolio = () => {
         }}
       >
         <div className="portfolio-slider-heading-wrap">
-          {/* Keep your current Portfolio badge */}
           <p className="portfolio-slider-badge">
             <PiStarFourFill />
             Portfolio
           </p>
 
-          {/* Keep your current wording */}
           <h2 className="portfolio-slider-title">
-             Check out my featured projects
+            Check out my featured projects
           </h2>
         </div>
 
-        {/* Carousel arrows */}
         <div className="portfolio-slider-controls">
           <button
             type="button"
             className="portfolio-slider-arrow portfolio-slider-arrow-prev"
-            onClick={() => scrollProjects("prev")}
-            aria-label="Previous project"
+            onClick={() =>
+              scrollProjects("prev")
+            }
+            aria-label="Previous projects"
+            disabled={currentPage === 0}
           >
             <HiArrowLeft />
           </button>
@@ -202,8 +322,14 @@ export const Portfolio = () => {
           <button
             type="button"
             className="portfolio-slider-arrow portfolio-slider-arrow-next"
-            onClick={() => scrollProjects("next")}
-            aria-label="Next project"
+            onClick={() =>
+              scrollProjects("next")
+            }
+            aria-label="Next projects"
+            disabled={
+              currentPage ===
+              totalPages - 1
+            }
           >
             <HiArrowRight />
           </button>
@@ -245,15 +371,17 @@ export const Portfolio = () => {
               duration: 0.25,
             }}
           >
-            {/* ===============================
-                PROJECT IMAGE
-            =============================== */}
+            {/* IMAGE */}
 
             <div className="portfolio-slider-image-wrap">
               <img
                 src={project.image}
                 alt={project.title}
                 className="portfolio-slider-image"
+                style={{
+                  objectPosition:
+                    project.imagePosition,
+                }}
               />
 
               <div
@@ -262,25 +390,21 @@ export const Portfolio = () => {
               />
             </div>
 
-            {/* ===============================
-                GLASS CONTENT PANEL
-            =============================== */}
+            {/* CONTENT */}
 
             <div className="portfolio-slider-info">
-              {/* Tags */}
-
               <div className="portfolio-slider-tags">
-                {project.tags.map((tagText) => (
-                  <span
-                    key={tagText}
-                    className="portfolio-slider-tag"
-                  >
-                    {tagText}
-                  </span>
-                ))}
+                {project.tags.map(
+                  (tagText) => (
+                    <span
+                      key={tagText}
+                      className="portfolio-slider-tag"
+                    >
+                      {tagText}
+                    </span>
+                  )
+                )}
               </div>
-
-              {/* Bottom title / link */}
 
               <div className="portfolio-slider-card-bottom">
                 <h3 className="portfolio-slider-card-title">
@@ -335,15 +459,33 @@ export const Portfolio = () => {
       >
         <div className="portfolio-slider-count">
           <span className="portfolio-slider-current">
-            {String(activeIndex + 1).padStart(2, "0")}
+            {String(
+              firstVisibleProject
+            ).padStart(2, "0")}
           </span>
+
+          {cardsPerPage > 1 && (
+            <>
+              <span className="portfolio-slider-range">
+                –
+              </span>
+
+              <span className="portfolio-slider-current">
+                {String(
+                  lastVisibleProject
+                ).padStart(2, "0")}
+              </span>
+            </>
+          )}
 
           <span className="portfolio-slider-slash">
             /
           </span>
 
           <span className="portfolio-slider-total">
-            {String(projects.length).padStart(2, "0")}
+            {String(
+              projects.length
+            ).padStart(2, "0")}
           </span>
         </div>
 

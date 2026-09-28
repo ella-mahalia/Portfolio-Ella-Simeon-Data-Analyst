@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Retail Demand Forecasting & Store Performance Analytics case study." />
+  <title>Retail Demand Forecasting & Store Performance</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/">Ella Simeon</a>
+    <nav>
+      <a href="#overview">Overview</a>
+      <a href="#performance">Performance</a>
+      <a href="#forecasting">Forecasting</a>
+      <a href="#methodology">Methodology</a>
+    </nav>
+    <a class="portfolio-link" href="/#portfolio">Back to portfolio ↗</a>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">RETAIL ANALYTICS · TIME SERIES · FORECASTING</p>
+        <h1>Retail Demand Forecasting & Store Performance</h1>
+        <p class="hero-text">
+          An end-to-end analytics case study using historical Walmart store and department sales
+          to uncover demand patterns, measure holiday effects, compare forecasting approaches,
+          and translate predictions into operational planning signals.
+        </p>
+        <div class="hero-tags">
+          <span>Time Series</span><span>Forecasting</span><span>Python</span><span>SQL</span><span>Data Visualization</span>
+        </div>
+        <div class="hero-actions">
+          <a href="#overview" class="primary-btn">Explore the analysis</a>
+          <a href="#methodology" class="secondary-btn">View methodology</a>
+        </div>
+      </div>
+
+      <div class="hero-panel">
+        <div class="hero-panel-top">
+          <span>PROJECT SCOPE</span>
+          <strong>Historical demand → forecast → business action</strong>
+        </div>
+        <div class="pipeline">
+          <div><b>01</b><span>Join & clean</span></div>
+          <i>→</i>
+          <div><b>02</b><span>Explore demand</span></div>
+          <i>→</i>
+          <div><b>03</b><span>Engineer features</span></div>
+          <i>→</i>
+          <div><b>04</b><span>Forecast</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="project-note" id="data-mode-note">
+      <strong>Portfolio build note:</strong>
+      <span>
+        The included page ships with preview values so the layout works immediately.
+        Run <code>src/build_dashboard_data.py</code> with the real Walmart CSV files to replace
+        every analytical visual with results calculated from the dataset.
+      </span>
+    </section>
+
+    <section class="section dashboard-section" id="overview">
+      <div class="section-intro">
+        <div>
+          <p class="section-kicker">01 · ANALYTICS OVERVIEW</p>
+          <h2>Sales & demand overview</h2>
+        </div>
+        <p>
+          The first view answers the executive question: how much demand exists, how it changes
+          over time, and where the largest seasonal or holiday effects appear.
+        </p>
+      </div>
+
+      <div class="dashboard-shell">
+        <aside class="side-nav">
+          <div class="side-brand"><span>RD</span><strong>Demand Lab</strong></div>
+          <button class="nav-btn active" data-jump="overview">Overview</button>
+          <button class="nav-btn" data-jump="performance">Store Performance</button>
+          <button class="nav-btn" data-jump="forecasting">Forecast & Risk</button>
+          <button class="nav-btn" data-jump="methodology">Methodology</button>
+
+          <div class="filter-block">
+            <small>VIEW</small>
+            <select id="view-filter">
+              <option value="all">All Stores</option>
+              <option value="a">Store Type A</option>
+              <option value="b">Store Type B</option>
+              <option value="c">Store Type C</option>
+            </select>
+            <select id="period-filter">
+              <option value="all">All Periods</option>
+              <option value="2010">2010</option>
+              <option value="2011">2011</option>
+              <option value="2012">2012</option>
+            </select>
+          </div>
+        </aside>
+
+        <div class="dashboard-main">
+          <div class="dash-title">
+            <div>
+              <span class="mini-label">RETAIL DEMAND ANALYTICS</span>
+              <h3>Sales & Demand Overview</h3>
+            </div>
+            <div class="filter-context">
+              <span class="filter-context-label">Current view</span>
+              <strong id="filter-context-text">All Stores · All Periods</strong>
+            </div>
+          </div>
+
+          <div class="kpi-grid">
+            <article class="kpi-card">
+              <span class="kpi-icon">↗</span>
+              <div><small>Total Sales</small><strong id="kpi-total-sales">Run analysis</strong></div>
+            </article>
+            <article class="kpi-card">
+              <span class="kpi-icon">▤</span>
+              <div><small>Average Weekly Sales</small><strong id="kpi-average-weekly">Run analysis</strong></div>
+            </article>
+            <article class="kpi-card">
+              <span class="kpi-icon">⌂</span>
+              <div><small>Total Stores</small><strong id="kpi-stores">45</strong></div>
+            </article>
+            <article class="kpi-card">
+              <span class="kpi-icon">▦</span>
+              <div><small>Total Departments</small><strong id="kpi-departments">Run analysis</strong></div>
+            </article>
+            <article class="kpi-card accent">
+              <span class="kpi-icon">✦</span>
+              <div><small>Holiday Sales Lift</small><strong id="kpi-holiday-lift">Run analysis</strong></div>
+            </article>
+          </div>
+
+          <div class="chart-grid overview-grid">
+            <article class="chart-card wide">
+              <div class="card-heading">
+                <div><small>TREND</small><h4>Weekly sales trend</h4></div>
+                <div class="toggle-group"><button class="selected">Weekly</button><button>Monthly</button></div>
+              </div>
+              <div id="weekly-chart" class="svg-chart"></div>
+            </article>
+
+            <article class="chart-card">
+              <div class="card-heading"><div><small>MIX</small><h4>Sales by store type</h4></div></div>
+              <div id="store-type-chart" class="donut-wrap"></div>
+            </article>
+
+            <article class="chart-card">
+              <div class="card-heading"><div><small>CONTRIBUTION</small><h4>Top departments</h4></div></div>
+              <div id="department-chart" class="bars"></div>
+            </article>
+
+            <article class="chart-card medium">
+              <div class="card-heading"><div><small>SEASONALITY</small><h4>Monthly demand pattern</h4></div></div>
+              <div id="seasonality-chart" class="mini-columns"></div>
+            </article>
+
+            <article class="chart-card medium">
+              <div class="card-heading">
+                <div><small>HOLIDAY EFFECT</small><h4>Holiday vs. non-holiday weekly sales</h4></div>
+              </div>
+              <div id="holiday-comparison-chart" class="holiday-compare"></div>
+            </article>
+
+            <article class="chart-card medium insight-card">
+              <div class="insight-icon">✦</div>
+              <div>
+                <small>ANALYST QUESTION</small>
+                <h4>Where do recurring demand spikes occur?</h4>
+                <p>
+                  Compare baseline periods with major holiday weeks, then use lagged sales and
+                  rolling averages to determine whether the pattern is predictable.
+                </p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="performance">
+      <div class="section-intro">
+        <div><p class="section-kicker">02 · DIAGNOSTIC ANALYSIS</p><h2>Store & department performance</h2></div>
+        <p>
+          Aggregate results are useful, but operational decisions happen at lower levels.
+          This section breaks performance down by store type, department, scale, and seasonal behavior.
+        </p>
+      </div>
+
+      <div class="analysis-grid">
+        <article class="analysis-card span-7">
+          <div class="analysis-title"><span>Store performance</span><b>45 stores</b></div>
+          <div class="store-ranking">
+            <div class="rank-head"><span>Rank</span><span>Store</span><span>Type</span><span>Demand index</span></div>
+            <div class="rank-row"><b>01</b><span>Store 20</span><span class="tag">A</span><div class="progress"><i style="width:96%"></i></div></div>
+            <div class="rank-row"><b>02</b><span>Store 4</span><span class="tag">A</span><div class="progress"><i style="width:91%"></i></div></div>
+            <div class="rank-row"><b>03</b><span>Store 14</span><span class="tag">A</span><div class="progress"><i style="width:86%"></i></div></div>
+            <div class="rank-row"><b>04</b><span>Store 13</span><span class="tag">A</span><div class="progress"><i style="width:82%"></i></div></div>
+          </div>
+          <p class="preview-label">Preview layout — populated automatically after running the analysis script.</p>
+        </article>
+
+        <article class="analysis-card span-5">
+          <div class="analysis-title"><span>Drivers to investigate</span><b>EDA</b></div>
+          <div class="driver-list">
+            <div><span>Store size</span><i style="width:88%"></i></div>
+            <div><span>Department</span><i style="width:76%"></i></div>
+            <div><span>Holiday week</span><i style="width:62%"></i></div>
+            <div><span>Markdown activity</span><i style="width:51%"></i></div>
+            <div><span>Economic features</span><i style="width:38%"></i></div>
+          </div>
+          <p class="preview-label">Exploratory hypotheses, not causal conclusions.</p>
+        </article>
+
+        <article class="analysis-card span-12">
+          <div class="analysis-title"><span>Business interpretation framework</span><b>ANALYST LENS</b></div>
+          <div class="lens-grid">
+            <div><strong>Scale</strong><p>Which stores and departments account for the largest share of sales?</p></div>
+            <div><strong>Seasonality</strong><p>Which peaks repeat annually and which appear anomalous?</p></div>
+            <div><strong>Promotion</strong><p>Do markdown-heavy periods coincide with stronger demand?</p></div>
+            <div><strong>Stability</strong><p>Which store-department series are predictable versus volatile?</p></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section dark-section" id="forecasting">
+      <div class="section-intro light">
+        <div><p class="section-kicker">03 · DATA SCIENCE</p><h2>Forecasting & demand risk</h2></div>
+        <p>
+          Forecasting is evaluated with time-based validation, not random train/test splitting,
+          so every model is tested on future periods it has not seen.
+        </p>
+      </div>
+
+      <div class="forecast-layout">
+        <article class="dark-card forecast-card">
+          <div class="card-heading light">
+            <div><small>ACTUAL VS FORECAST</small><h4>Demand forecast</h4></div>
+            <span class="forecast-pill">8-week view</span>
+          </div>
+          <div id="forecast-chart" class="svg-chart dark-chart"></div>
+        </article>
+
+        <article class="dark-card">
+          <div class="card-heading light"><div><small>MODEL SELECTION</small><h4>Model comparison</h4></div></div>
+          <div id="model-table" class="model-table"></div>
+        </article>
+
+        <article class="dark-card">
+          <div class="card-heading light"><div><small>EXPLAINABILITY</small><h4>Feature importance</h4></div></div>
+          <div id="feature-chart" class="feature-bars"></div>
+        </article>
+
+        <article class="dark-card">
+          <div class="card-heading light"><div><small>OPERATIONS</small><h4>Demand risk indicator</h4></div></div>
+          <div id="risk-list" class="risk-list"></div>
+        </article>
+      </div>
+
+      <div class="risk-definition">
+        <strong>Demand Risk ≠ Inventory Shortage.</strong>
+        <span>
+          The public dataset does not contain stock-on-hand. This project therefore labels
+          unusually high forecast demand as a planning risk signal rather than claiming an inventory shortage.
+        </span>
+      </div>
+    </section>
+
+    <section class="section" id="methodology">
+      <div class="section-intro">
+        <div><p class="section-kicker">04 · METHODOLOGY</p><h2>How the analysis was built</h2></div>
+        <p>
+          The workflow is designed to demonstrate the full analyst-to-data-scientist process:
+          data modeling, EDA, feature engineering, forecasting, evaluation, and business interpretation.
+        </p>
+      </div>
+
+      <div class="method-steps">
+        <article><span>01</span><h3>Data integration</h3><p>Join historical sales with store attributes and weekly economic / markdown features.</p></article>
+        <article><span>02</span><h3>Data quality</h3><p>Convert dates, inspect missing markdowns, validate duplicate keys, and preserve holiday flags.</p></article>
+        <article><span>03</span><h3>EDA</h3><p>Analyze trend, seasonality, store types, departments, holidays, and volatility.</p></article>
+        <article><span>04</span><h3>Feature engineering</h3><p>Create lags, rolling means, calendar features, holiday indicators, and store-level context.</p></article>
+        <article><span>05</span><h3>Forecasting</h3><p>Compare a seasonal baseline with machine-learning regressors using chronological validation.</p></article>
+        <article><span>06</span><h3>Decision layer</h3><p>Translate forecast deviation into transparent demand-risk signals for planning.</p></article>
+      </div>
+
+      <div class="code-grid">
+        <article class="code-card">
+          <div class="code-header"><span>SQL · Store / Department summary</span></div>
+          <pre><code>SELECT
+    Store,
+    Dept,
+    SUM(Weekly_Sales) AS Total_Sales,
+    AVG(Weekly_Sales) AS Avg_Weekly_Sales,
+    COUNT(DISTINCT Date) AS Weeks
+FROM sales
+GROUP BY Store, Dept
+ORDER BY Total_Sales DESC;</code></pre>
+        </article>
+
+        <article class="code-card">
+          <div class="code-header"><span>Python · Time-series features</span></div>
+          <pre><code>df["lag_1"] = group["Weekly_Sales"].shift(1)
+df["lag_4"] = group["Weekly_Sales"].shift(4)
+
+df["rolling_4"] = (
+    group["Weekly_Sales"]
+    .shift(1)
+    .rolling(4)
+    .mean()
+)</code></pre>
+        </article>
+      </div>
+    </section>
+
+    <section class="section source-section">
+      <div class="source-grid">
+        <div>
+          <p class="section-kicker">DATA SOURCE</p>
+          <h2>Walmart Recruiting — Store Sales Forecasting</h2>
+          <p>
+            Historical weekly department sales for 45 anonymized Walmart stores,
+            accompanied by store type/size and additional weekly features such as temperature,
+            fuel price, CPI, unemployment, markdowns, and holiday indicators.
+          </p>
+        </div>
+        <div class="source-card">
+          <strong>Historical sales</strong><span>train.csv</span>
+          <strong>Store metadata</strong><span>stores.csv</span>
+          <strong>Weekly features</strong><span>features.csv</span>
+          <strong>Forecast horizon</strong><span>test.csv</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span>Ella Simeon · Data Analytics & Data Science Portfolio</span>
+    <span>Retail Demand Forecasting Case Study</span>
+  </footer>
+
+  <script src="./data/dashboard-data.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>
