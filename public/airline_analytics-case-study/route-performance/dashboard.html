@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Route Performance & Capacity | Airline Analytics</title>
+<link rel="stylesheet" href="../theme.css">
+<style>
+.page-hero{
+  padding:34px;border-radius:30px;
+  background:linear-gradient(135deg,#002B49,#005589 60%,#0074C8);
+  color:white;box-shadow:0 22px 50px rgba(0,43,73,.18)
+}
+.page-hero .eyebrow{color:#8DDBF1}.page-hero h1{color:white;font-size:52px}
+.page-hero .lead{color:rgba(255,255,255,.78)}
+.route-row{display:grid;grid-template-columns:120px 1fr 62px;gap:10px;align-items:center;margin:14px 0}
+.route-row b{font-size:11px}.route-row .value{text-align:right;font-size:11px;font-weight:850}
+.forecast-bars{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;height:150px;align-items:end;margin-top:16px}
+.forecast-bars .b{border-radius:8px 8px 3px 3px;background:linear-gradient(180deg,var(--cyan),var(--blue-2));position:relative}
+.forecast-bars .b em{position:absolute;top:-20px;left:50%;transform:translateX(-50%);font-style:normal;font-size:9px;font-weight:850}
+.forecast-bars .b span{position:absolute;bottom:-20px;left:50%;transform:translateX(-50%);font-size:9px;color:var(--muted)}
+</style></head>
+<body><div class="shell">
+<a class="back" href="../index.html">← Full airline case study</a>
+
+<section class="page-hero" style="margin-top:22px">
+  <div class="eyebrow">Network Planning Analytics</div>
+  <h1>Route Performance & Capacity</h1>
+  <p class="lead">A six-route planning analysis using public BTS T-100 workflow concepts, forecast backtesting, and an illustrative seat-capacity scenario.</p>
+</section>
+
+<div class="kpis" style="margin-top:18px">
+  <div class="kpi"><div class="v">6</div><div class="l">Selected nonstop routes</div></div>
+  <div class="kpi"><div class="v">BOS–LAX</div><div class="l">Illustrative capacity case</div></div>
+  <div class="kpi"><div class="v">+4,165</div><div class="l">Scenario seats · May–Aug</div></div>
+  <div class="kpi"><div class="v">85%</div><div class="l">Illustrative LF target</div></div>
+</div>
+
+<section class="section-band">
+  <div class="grid2">
+    <div class="panel chart-card">
+      <div class="chart-title"><h3>Seasonal route pattern</h3><span>Indexed demand illustration</span></div>
+      <div class="forecast-bars">
+        <div class="b" style="height:44%"><em>68</em><span>Mar</span></div>
+        <div class="b" style="height:53%"><em>73</em><span>Apr</span></div>
+        <div class="b" style="height:64%"><em>79</em><span>May</span></div>
+        <div class="b" style="height:78%"><em>84</em><span>Jun</span></div>
+        <div class="b" style="height:92%"><em>89</em><span>Jul</span></div>
+        <div class="b" style="height:82%"><em>85</em><span>Aug</span></div>
+      </div>
+    </div>
+
+    <div class="panel chart-card">
+      <div class="chart-title"><h3>BOS–LAX capacity scenario</h3><span>Illustrative</span></div>
+      <div class="route-row"><b>Baseline</b><div class="metricline"><i style="width:79%"></i></div><div class="value">79%</div></div>
+      <div class="route-row"><b>Scenario</b><div class="metricline"><i style="width:91%;background:var(--cyan)"></i></div><div class="value">91%</div></div>
+      <div class="notice" style="margin-top:16px">The scenario adds roughly 4,165 seats across May–August in the portfolio example. It is a planning illustration—not a recommendation to change a real schedule without fleet, operational, commercial, and network constraints.</div>
+    </div>
+  </div>
+</section>
+
+<section class="section-band">
+  <div class="grid2">
+    <div class="panel chart-card">
+      <div class="chart-title"><h3>Forecast reliability</h3><span>Backtest lens</span></div>
+      <div class="route-row"><b>BOS–LAX</b><div class="metricline"><i style="width:76%"></i></div><div class="value">76%</div></div>
+      <div class="route-row"><b>BOS–DCA</b><div class="metricline"><i style="width:34%;background:var(--amber)"></i></div><div class="value">34%</div></div>
+      <p class="subtle" style="margin-top:18px">BOS–DCA remains visibly weaker in the documented project workflow, so the analysis keeps the uncertainty visible rather than forcing a recommendation.</p>
+    </div>
+
+    <div class="panel chart-card">
+      <div class="chart-title"><h3>Planning workflow</h3><span>Decision sequence</span></div>
+      <div class="stat-row"><strong>01 · Observe</strong><span>Traffic, seats, departures, load factor</span></div>
+      <div class="stat-row"><strong>02 · Backtest</strong><span>Quantify forecast error</span></div>
+      <div class="stat-row"><strong>03 · Scenario</strong><span>Translate credible signal into capacity options</span></div>
+      <div class="stat-row"><strong>04 · Constrain</strong><span>Separate model output from a real schedule decision</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="dark-section">
+  <div class="eyebrow">Planning takeaway</div>
+  <h2>Forecast confidence belongs next to the recommendation.</h2>
+  <p>Demand growth alone is not enough. A useful planning analysis also shows whether the forecast is reliable enough to support the capacity decision.</p>
+</section>
+
+<div class="footer">Route-planning section preserves documented findings from the original six-route BTS T-100 project.</div>
+</div></body></html>

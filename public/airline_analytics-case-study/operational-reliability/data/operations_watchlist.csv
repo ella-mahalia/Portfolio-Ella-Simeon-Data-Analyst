@@ -1,0 +1,13 @@
+service_date,flight_id,rotation_id,tail,leg_number,origin,destination,scheduled_departure,scheduled_turn_min,inbound_delay_min,primary_delay_min,propagated_delay_min,departure_delay_min,arrival_delay_min,a14,d0,cancelled,weather_flag,atc_flag,maintenance_flag,crew_flag,airport_congestion_index,remaining_legs,risk_score,risk_band,why_flagged,projected_downstream_delay_min
+2026-08-18,AX1619,ROT-305,N792EA,2,JFK,SJU,2026-08-18 08:48,40,72,47,72,119,109,0,0,0,0,1,0,0,0.77,2,64,High,Late inbound + Tight turn + Congestion + ATC,158
+2026-08-20,AX1682,ROT-319,N685EA,4,JFK,DCA,2026-08-20 16:45,30,148,0,148,148,148,0,0,0,0,0,0,0,0.9,0,64,High,Late inbound + Tight turn + Congestion,127
+2026-08-20,AX1681,ROT-319,N685EA,3,BOS,JFK,2026-08-20 14:55,35,121,32,121,153,148,0,0,0,0,0,1,0,0.46,1,64,High,Late inbound + Tight turn + Maintenance,108
+2026-08-24,AX1802,ROT-347,N228EA,2,JFK,FLL,2026-08-24 08:17,30,65,4,65,69,61,0,0,0,0,0,0,0,0.7,3,61,High,Late inbound + Tight turn + Congestion + Downstream exposure,162
+2026-08-20,AX1674,ROT-317,N584EA,5,JFK,MCO,2026-08-20 22:29,40,42,63,42,105,94,0,0,0,1,1,0,0,0.73,0,60,High,Late inbound + Tight turn + Congestion + Weather,72
+2026-08-24,AX1804,ROT-347,N228EA,4,JFK,SJU,2026-08-24 15:12,50,49,89,39,128,126,0,0,0,1,1,0,0,0.87,1,59,High,Late inbound + Congestion + Weather + ATC,72
+2026-08-19,AX1643,ROT-311,N764EA,2,BOS,JFK,2026-08-19 08:23,40,26,95,26,121,115,0,0,0,1,0,1,0,0.45,3,57,High,Late inbound + Tight turn + Weather + Maintenance,217
+2026-08-23,AX1770,ROT-340,N637EA,2,JFK,SJU,2026-08-23 09:32,50,68,56,58,114,111,0,0,0,0,1,0,0,0.72,3,56,High,Late inbound + Congestion + ATC + Downstream exposure,201
+2026-08-19,AX1639,ROT-310,N343EA,2,BOS,JFK,2026-08-19 09:04,40,54,52,54,106,98,0,0,0,1,0,0,0,0.56,2,56,High,Late inbound + Tight turn + Weather,119
+2026-08-20,AX1678,ROT-318,N336EA,4,JFK,MCO,2026-08-20 15:32,35,8,111,8,119,106,0,0,0,1,1,0,0,0.91,0,56,High,Tight turn + Congestion + Weather + ATC,73
+2026-08-21,AX1719,ROT-328,N524EA,4,JFK,SJU,2026-08-21 17:35,45,64,35,59,94,87,0,0,0,0,1,0,0,0.83,1,55,High,Late inbound + Congestion + ATC,45
+2026-08-22,AX1744,ROT-334,N293EA,3,BOS,FLL,2026-08-22 15:11,35,71,0,71,71,58,0,0,0,0,0,0,0,0.62,2,54,High,Late inbound + Tight turn,84

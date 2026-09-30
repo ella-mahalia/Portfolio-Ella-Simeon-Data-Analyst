@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Operational Reliability & Recovery | Airline Analytics</title>
+<link rel="stylesheet" href="../theme.css">
+<style>
+.page-hero{
+  padding:34px;border-radius:30px;
+  background:linear-gradient(135deg,#002B49,#005589 60%,#0074C8);
+  color:white;box-shadow:0 22px 50px rgba(0,43,73,.18)
+}
+.page-hero .eyebrow{color:#8DDBF1}.page-hero h1{color:white;font-size:52px}
+.page-hero .lead{color:rgba(255,255,255,.78)}
+.watch{overflow:auto}.band{font-weight:850}
+.rot{padding:13px 0;border-bottom:1px solid #EAF0F5}
+.rot-top{display:flex;justify-content:space-between;font-size:13px;font-weight:800}
+.rot-sub{font-size:11px;color:var(--muted);margin-top:5px}
+.method td:first-child{font-weight:800;width:38%}
+.airport-row{margin:16px 0}.airport-head{display:flex;justify-content:space-between;font-size:11px;gap:10px}
+</style></head>
+<body><div class="shell">
+<a class="back" href="../index.html">← Full airline case study</a>
+
+<section class="page-hero" style="margin-top:22px">
+  <div class="eyebrow">Operations Analytics</div>
+  <h1>Operational Reliability & Network Recovery</h1>
+  <p class="lead">A forward-looking operations view that explores how late inbound aircraft, turn-time pressure, congestion, weather, ATC constraints, and remaining downstream legs can combine to increase disruption risk.</p>
+</section>
+
+<div class="kpis" id="kpis" style="margin-top:18px"></div>
+
+<section class="section-band">
+  <div class="grid2">
+    <section class="panel chart-card">
+      <div class="chart-title"><h3>Operations watchlist</h3><span>Highest-risk synthetic flights</span></div>
+      <div class="watch"><table><thead><tr><th>Flight</th><th>Rotation</th><th>Route</th><th>Risk</th><th>Why flagged</th><th>Inbound</th><th>Turn</th><th>Downstream</th></tr></thead><tbody id="queue"></tbody></table></div>
+    </section>
+
+    <section class="panel chart-card">
+      <div class="chart-title"><h3>Origin reliability</h3><span>Flagged flights by origin</span></div>
+      <div id="airports"></div>
+    </section>
+  </div>
+</section>
+
+<section class="section-band">
+  <div class="grid2">
+    <section class="panel chart-card">
+      <div class="chart-title"><h3>Rotation recovery view</h3><span>Downstream exposure</span></div>
+      <div id="rotations"></div>
+    </section>
+
+    <section class="panel chart-card">
+      <div class="chart-title"><h3>Leading-indicator logic</h3><span>Transparent heuristic</span></div>
+      <table class="method">
+        <tr><td>Inbound delay</td><td>Shows disruption already entering the next leg.</td></tr>
+        <tr><td>Turn pressure</td><td>Less buffer means less ability to recover.</td></tr>
+        <tr><td>Congestion</td><td>Adds airport-level operating pressure.</td></tr>
+        <tr><td>Weather / ATC</td><td>Represents external system constraints.</td></tr>
+        <tr><td>Maintenance / crew</td><td>Adds airline-controlled constraints.</td></tr>
+        <tr><td>Remaining legs</td><td>Measures downstream exposure.</td></tr>
+      </table>
+    </section>
+  </div>
+</section>
+
+<section class="dark-section">
+  <div class="eyebrow">Operational takeaway</div>
+  <h2>Move from historical reporting to earlier prioritization.</h2>
+  <p>The point is not only to count delayed flights. The stronger question is where current operating conditions suggest a disruption may continue propagating through the network.</p>
+</section>
+
+<div class="footer">Synthetic portfolio data · Risk score is transparent and illustrative, not a production airline model.</div>
+</div>
+
+<script>
+const D={"summary": {"flights": 214, "a14": 40.7, "d0": 10.3, "completion": 100.0, "median_delay": 23.0, "high_risk": 29, "propagated": 3909}, "queue": [{"service_date": "2026-08-18", "flight_id": "AX1619", "rotation_id": "ROT-305", "tail": "N792EA", "leg_number": 2, "origin": "JFK", "destination": "SJU", "scheduled_departure": "2026-08-18 08:48", "scheduled_turn_min": 40, "inbound_delay_min": 72, "primary_delay_min": 47, "propagated_delay_min": 72, "departure_delay_min": 119, "arrival_delay_min": 109, "a14": 0, "d0": 0, "cancelled": 0, "weather_flag": 0, "atc_flag": 1, "maintenance_flag": 0, "crew_flag": 0, "airport_congestion_index": 0.77, "remaining_legs": 2, "risk_score": 64, "risk_band": "High", "why_flagged": "Late inbound + Tight turn + Congestion + ATC", "projected_downstream_delay_min": 158}, {"service_date": "2026-08-20", "flight_id": "AX1682", "rotation_id": "ROT-319", "tail": "N685EA", "leg_number": 4, "origin": "JFK", "destination": "DCA", "scheduled_departure": "2026-08-20 16:45", "scheduled_turn_min": 30, "inbound_delay_min": 148, "primary_delay_min": 0, "propagated_delay_min": 148, "departure_delay_min": 148, "arrival_delay_min": 148, "a14": 0, "d0": 0, "cancelled": 0, "weather_flag": 0, "atc_flag": 0, "maintenance_flag": 0, "crew_flag": 0, "airport_congestion_index": 0.9, "remaining_legs": 0, "risk_score": 64, "risk_band": "High", "why_flagged": "Late inbound + Tight turn + Congestion", "projected_downstream_delay_min": 127}, {"service_date": "2026-08-20", "flight_id": "AX1681", "rotation_id": "ROT-319", "tail": "N685EA", "leg_number": 3, "origin": "BOS", "destination": "JFK", "scheduled_departure": "2026-08-20 14:55", "scheduled_turn_min": 35, "inbound_delay_min": 121, "primary_delay_min": 32, "propagated_delay_min": 121, "departure_delay_min": 153, "arrival_delay_min": 148, "a14": 0, "d0": 0, "cancelled": 0, "weather_flag": 0, "atc_flag": 0, "maintenance_flag": 1, "crew_flag": 0, "airport_congestion_index": 0.46, "remaining_legs": 1, "risk_score": 64, "risk_band": "High", "why_flagged": "Late inbound + Tight turn + Maintenance", "projected_downstream_delay_min": 108}, {"service_date": "2026-08-24", "flight_id": "AX1802", "rotation_id": "ROT-347", "tail": "N228EA", "leg_number": 2, "origin": "JFK", "destination": "FLL", "scheduled_departure": "2026-08-24 08:17", "scheduled_turn_min": 30, "inbound_delay_min": 65, "primary_delay_min": 4, "propagated_delay_min": 65, "departure_delay_min": 69, "arrival_delay_min": 61, "a14": 0, "d0": 0, "cancelled": 0, "weather_flag": 0, "atc_flag": 0, "maintenance_flag": 0, "crew_flag": 0, "airport_congestion_index": 0.7, "remaining_legs": 3, "risk_score": 61, "risk_band": "High", "why_flagged": "Late inbound + Tight turn + Congestion + Downstream exposure", "projected_downstream_delay_min": 162}, {"service_date": "2026-08-20", "flight_id": "AX1674", "rotation_id": "ROT-317", "tail": "N584EA", "leg_number": 5, "origin": "JFK", "destination": "MCO", "scheduled_departure": "2026-08-20 22:29", "scheduled_turn_min": 40, "inbound_delay_min": 42, "primary_delay_min": 63, "propagated_delay_min": 42, "departure_delay_min": 105, "arrival_delay_min": 94, "a14": 0, "d0": 0, "cancelled": 0, "weather_flag": 1, "atc_flag": 1, "maintenance_flag": 0, "crew_flag": 0, "airport_congestion_index": 0.73, "remaining_legs": 0, "risk_score": 60, "risk_band": "High", "why_flagged": "Late inbound + Tight turn + Congestion + Weather", "projected_downstream_delay_min": 72}, {"service_date": "2026-08-24", "flight_id": "AX1804", "rotation_id": "ROT-347", "tail": "N228EA", "leg_number": 4, "origin": "JFK", "destination": "SJU", "scheduled_departure": "2026-08-24 15:12", "scheduled_turn_min": 50, "inbound_delay_min": 49, "primary_delay_min": 89, "propagated_delay_min": 39, "departure_delay_min": 128, "arrival_delay_min": 126, "a14": 0, "d0": 0, "cancelled": 0, "weather_flag": 1, "atc_flag": 1, "maintenance_flag": 0, "crew_flag": 0, "airport_congestion_index": 0.87, "remaining_legs": 1, "risk_score": 59, "risk_band": "High", "why_flagged": "Late inbound + Congestion + Weather + ATC", "projected_downstream_delay_min": 72}, {"service_date": "2026-08-19", "flight_id": "AX1643", "rotation_id": "ROT-311", "tail": "N764EA", "leg_number": 2, "origin": "BOS", "destination": "JFK", "scheduled_departure": "2026-08-19 08:23", "scheduled_turn_min": 40, "inbound_delay_min": 26, "primary_delay_min": 95, "propagated_delay_min": 26, "departure_delay_min": 121, "arrival_delay_min": 115, "a14": 0, "d0": 0, "cancelled": 0, "weather_flag": 1, "atc_flag": 0, "maintenance_flag": 1, "crew_flag": 0, "airport_congestion_index": 0.45, "remaining_legs": 3, "risk_score": 57, "risk_band": "High", "why_flagged": "Late inbound + Tight turn + Weather + Maintenance", "projected_downstream_delay_min": 217}, {"service_date": "2026-08-23", "flight_id": "AX1770", "rotation_id": "ROT-340", "tail": "N637EA", "leg_number": 2, "origin": "JFK", "destination": "SJU", "scheduled_departure": "2026-08-23 09:32", "scheduled_turn_min": 50, "inbound_delay_min": 68, "primary_delay_min": 56, "propagated_delay_min": 58, "departure_delay_min": 114, "arrival_delay_min": 111, "a14": 0, "d0": 0, "cancelled": 0, "weather_flag": 0, "atc_flag": 1, "maintenance_flag": 0, "crew_flag": 0, "airport_congestion_index": 0.72, "remaining_legs": 3, "risk_score": 56, "risk_band": "High", "why_flagged": "Late inbound + Congestion + ATC + Downstream exposure", "projected_downstream_delay_min": 201}, {"service_date": "2026-08-19", "flight_id": "AX1639", "rotation_id": "ROT-310", "tail": "N343EA", "leg_number": 2, "origin": "BOS", "destination": "JFK", "scheduled_departure": "2026-08-19 09:04", "scheduled_turn_min": 40, "inbound_delay_min": 54, "primary_delay_min": 52, "propagated_delay_min": 54, "departure_delay_min": 106, "arrival_delay_min": 98, "a14": 0, "d0": 0, "cancelled": 0, "weather_flag": 1, "atc_flag": 0, "maintenance_flag": 0, "crew_flag": 0, "airport_congestion_index": 0.56, "remaining_legs": 2, "risk_score": 56, "risk_band": "High", "why_flagged": "Late inbound + Tight turn + Weather", "projected_downstream_delay_min": 119}, {"service_date": "2026-08-20", "flight_id": "AX1678", "rotation_id": "ROT-318", "tail": "N336EA", "leg_number": 4, "origin": "JFK", "destination": "MCO", "scheduled_departure": "2026-08-20 15:32", "scheduled_turn_min": 35, "inbound_delay_min": 8, "primary_delay_min": 111, "propagated_delay_min": 8, "departure_delay_min": 119, "arrival_delay_min": 106, "a14": 0, "d0": 0, "cancelled": 0, "weather_flag": 1, "atc_flag": 1, "maintenance_flag": 0, "crew_flag": 0, "airport_congestion_index": 0.91, "remaining_legs": 0, "risk_score": 56, "risk_band": "High", "why_flagged": "Tight turn + Congestion + Weather + ATC", "projected_downstream_delay_min": 73}], "airports": [{"origin": "JFK", "flights": 86, "a14": 41.9, "avg_delay": 34.5, "high_risk": 15}, {"origin": "BOS", "flights": 49, "a14": 32.7, "avg_delay": 37.1, "high_risk": 6}, {"origin": "SJU", "flights": 16, "a14": 50.0, "avg_delay": 41.7, "high_risk": 4}, {"origin": "FLL", "flights": 37, "a14": 54.1, "avg_delay": 23.1, "high_risk": 4}, {"origin": "DCA", "flights": 11, "a14": 36.4, "avg_delay": 35.6, "high_risk": 0}, {"origin": "MCO", "flights": 15, "a14": 20.0, "avg_delay": 32.1, "high_risk": 0}], "rotations": [{"rotation_id": "ROT-319", "tail": "N685EA", "service_date": "2026-08-20", "flights": 4, "max_risk_score": 64, "total_arrival_delay_min": 451, "propagated_delay_min": 283, "projected_downstream_delay_min": 431}, {"rotation_id": "ROT-305", "tail": "N792EA", "service_date": "2026-08-18", "flights": 4, "max_risk_score": 64, "total_arrival_delay_min": 364, "propagated_delay_min": 238, "projected_downstream_delay_min": 398}, {"rotation_id": "ROT-347", "tail": "N228EA", "service_date": "2026-08-24", "flights": 5, "max_risk_score": 61, "total_arrival_delay_min": 438, "propagated_delay_min": 271, "projected_downstream_delay_min": 567}, {"rotation_id": "ROT-317", "tail": "N584EA", "service_date": "2026-08-20", "flights": 5, "max_risk_score": 60, "total_arrival_delay_min": 264, "propagated_delay_min": 135, "projected_downstream_delay_min": 234}, {"rotation_id": "ROT-311", "tail": "N764EA", "service_date": "2026-08-19", "flights": 5, "max_risk_score": 57, "total_arrival_delay_min": 507, "propagated_delay_min": 340, "projected_downstream_delay_min": 654}, {"rotation_id": "ROT-340", "tail": "N637EA", "service_date": "2026-08-23", "flights": 5, "max_risk_score": 56, "total_arrival_delay_min": 475, "propagated_delay_min": 371, "projected_downstream_delay_min": 663}, {"rotation_id": "ROT-310", "tail": "N343EA", "service_date": "2026-08-19", "flights": 4, "max_risk_score": 56, "total_arrival_delay_min": 340, "propagated_delay_min": 239, "projected_downstream_delay_min": 341}, {"rotation_id": "ROT-318", "tail": "N336EA", "service_date": "2026-08-20", "flights": 4, "max_risk_score": 56, "total_arrival_delay_min": 117, "propagated_delay_min": 11, "projected_downstream_delay_min": 79}]};
+const fmt=n=>Number(n).toLocaleString();
+const s=D.summary;
+const metrics=[
+  ["A14",s.a14+"%"],["D0",s.d0+"%"],["Completion",s.completion+"%"],
+  ["Median delay",s.median_delay+" min"],["High-risk flights",fmt(s.high_risk)],["Propagated delay",fmt(s.propagated)+" min"]
+];
+document.getElementById("kpis").innerHTML=metrics.map(x=>`<div class="kpi"><div class="v">${x[1]}</div><div class="l">${x[0]}</div></div>`).join("");
+
+document.getElementById("queue").innerHTML=D.queue.map(r=>`<tr>
+<td><b>${r.flight_id}</b></td><td>${r.rotation_id}</td><td>${r.origin}→${r.destination}</td>
+<td class="risk">${r.risk_score}</td><td>${r.why_flagged}</td><td>${r.inbound_delay_min}m</td>
+<td>${r.scheduled_turn_min}m</td><td>${r.projected_downstream_delay_min}m</td></tr>`).join("");
+
+const mx=Math.max(...D.airports.map(a=>a.high_risk),1);
+document.getElementById("airports").innerHTML=D.airports.map(a=>`
+  <div class="airport-row">
+    <div class="airport-head">
+      <span><b>${a.origin}</b> · A14 ${a.a14}% · avg ${a.avg_delay}m</span>
+      <span><b>${a.high_risk}</b> flagged</span>
+    </div>
+    <div class="bar-wrap" style="margin-top:7px">
+      <div class="rbar"><i style="width:${Math.max(4,a.high_risk/mx*100)}%"></i></div>
+      <div class="bar-value">${a.high_risk}</div>
+    </div>
+  </div>`).join("");
+
+document.getElementById("rotations").innerHTML=D.rotations.map(r=>`
+  <div class="rot">
+    <div class="rot-top">
+      <span>${r.rotation_id} · ${r.tail}</span>
+      <span class="${r.max_risk_score>=49?'risk':'warn'}">${r.max_risk_score} max risk</span>
+    </div>
+    <div class="rot-sub">${r.flights} legs · ${r.propagated_delay_min} propagated min · ${r.projected_downstream_delay_min} projected downstream min</div>
+  </div>`).join("");
+</script>
+</body></html>
