@@ -4724,3 +4724,348 @@ footer a:hover {
   }
 
 }
+/* =========================================================
+   FULL SCREEN PORTFOLIO LOADER
+   Keep this at the VERY BOTTOM of globals.css
+========================================================= */
+
+.portfolio-loader {
+  position: fixed !important;
+  inset: 0 !important;
+
+  width: 100vw !important;
+  height: 100vh !important;
+  min-height: 100svh !important;
+
+  z-index: 999999 !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  overflow: hidden !important;
+
+  /* Fully opaque — nothing from Hero should show through */
+  background:
+    radial-gradient(
+      circle at 50% 42%,
+      #ffffff 0%,
+      #fffdf8 45%,
+      #fff8ee 100%
+    ) !important;
+
+  isolation: isolate;
+}
+
+
+/* =========================================================
+   CENTER CONTENT
+========================================================= */
+
+.portfolio-loader .loader-content {
+  position: relative !important;
+  z-index: 20 !important;
+
+  width: min(900px, 88vw) !important;
+  max-width: 900px !important;
+
+  margin: 0 auto !important;
+
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  text-align: center !important;
+}
+
+
+/* =========================================================
+   TITLE
+========================================================= */
+
+.portfolio-loader .loader-content h1 {
+  margin: 0 !important;
+
+  font-size: clamp(2.6rem, 5vw, 4.8rem) !important;
+  font-weight: 700 !important;
+  line-height: 1.05 !important;
+
+  letter-spacing: -0.045em !important;
+
+  color: #002b49 !important;
+
+  text-align: center !important;
+}
+
+
+/* =========================================================
+   SUBTITLE
+========================================================= */
+
+.portfolio-loader .loader-content p {
+  margin: 16px 0 28px !important;
+
+  font-size: clamp(0.95rem, 1.6vw, 1.2rem) !important;
+  font-weight: 500 !important;
+
+  line-height: 1.5 !important;
+  letter-spacing: 0.025em !important;
+
+  color: #718399 !important;
+
+  text-align: center !important;
+}
+
+
+/* =========================================================
+   FLIGHT LOADER
+========================================================= */
+
+.portfolio-loader .flight-loader {
+  position: relative !important;
+
+  width: min(820px, 86vw) !important;
+
+  margin: 4px auto 0 !important;
+}
+
+.portfolio-loader .flight-route {
+  display: block !important;
+
+  width: 100% !important;
+  height: 150px !important;
+
+  overflow: visible !important;
+}
+
+
+/* Airplane */
+
+.portfolio-loader .loading-plane {
+  filter: drop-shadow(
+    0 6px 8px rgba(0, 56, 118, 0.18)
+  );
+}
+
+
+/* Percentage */
+
+.portfolio-loader .loader-percentage {
+  margin-top: -4px !important;
+
+  font-size: 1.65rem !important;
+  font-weight: 600 !important;
+
+  letter-spacing: -0.025em !important;
+
+  color: #315a84 !important;
+
+  text-align: center !important;
+}
+
+
+/* =========================================================
+   STARS
+========================================================= */
+
+.portfolio-loader .loader-star {
+  position: absolute !important;
+
+  z-index: 5;
+
+  display: block;
+
+  color: #003876;
+
+  pointer-events: none;
+  user-select: none;
+}
+
+.portfolio-loader .star-one {
+  top: 22%;
+  left: 12%;
+
+  font-size: 27px;
+}
+
+.portfolio-loader .star-two {
+  top: 27%;
+  right: 13%;
+
+  font-size: 23px;
+
+  color: #e0aa4e;
+}
+
+.portfolio-loader .star-three {
+  bottom: 22%;
+  left: 25%;
+
+  font-size: 20px;
+
+  color: #005589;
+}
+
+
+/* =========================================================
+   CLOUDS
+========================================================= */
+
+.portfolio-loader .loader-cloud {
+  position: absolute !important;
+
+  z-index: 2;
+
+  width: 180px;
+  height: 55px;
+
+  border-radius: 999px;
+
+  background: #e6eef6;
+
+  pointer-events: none;
+}
+
+.portfolio-loader .loader-cloud::before,
+.portfolio-loader .loader-cloud::after {
+  content: "";
+
+  position: absolute;
+
+  bottom: 0;
+
+  border-radius: 50%;
+
+  background: inherit;
+}
+
+.portfolio-loader .loader-cloud::before {
+  left: 25px;
+
+  width: 80px;
+  height: 80px;
+}
+
+.portfolio-loader .loader-cloud::after {
+  right: 20px;
+
+  width: 100px;
+  height: 100px;
+}
+
+.portfolio-loader .loader-cloud-one {
+  left: -35px;
+  bottom: 4%;
+
+  transform: scale(1.25);
+
+  opacity: 0.6;
+}
+
+.portfolio-loader .loader-cloud-two {
+  right: -25px;
+  bottom: 5%;
+
+  transform: scale(1.35);
+
+  opacity: 0.55;
+}
+
+.portfolio-loader .loader-cloud-three {
+  top: 16%;
+  right: 7%;
+
+  transform: scale(0.6);
+
+  opacity: 0.45;
+}
+
+
+/* =========================================================
+   DECORATIVE DOTS
+========================================================= */
+
+.portfolio-loader .loader-dots {
+  position: absolute !important;
+
+  z-index: 3;
+
+  display: grid;
+  grid-template-columns: repeat(4, 5px);
+
+  gap: 12px;
+
+  pointer-events: none;
+
+  opacity: 0.5;
+}
+
+.portfolio-loader .loader-dots span {
+  display: block;
+
+  width: 5px;
+  height: 5px;
+
+  border-radius: 999px;
+
+  background: #8eb8dc;
+}
+
+.portfolio-loader .loader-dots-one {
+  top: 8%;
+  right: 7%;
+}
+
+.portfolio-loader .loader-dots-two {
+  bottom: 10%;
+  left: 6%;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 700px) {
+  .portfolio-loader .loader-content {
+    width: 92vw !important;
+  }
+
+  .portfolio-loader .loader-content h1 {
+    font-size: clamp(
+      2.15rem,
+      10vw,
+      3.3rem
+    ) !important;
+  }
+
+  .portfolio-loader .loader-content p {
+    max-width: 310px !important;
+
+    margin: 13px auto 25px !important;
+
+    font-size: 0.95rem !important;
+  }
+
+  .portfolio-loader .flight-loader {
+    width: 92vw !important;
+  }
+
+  .portfolio-loader .flight-route {
+    height: 115px !important;
+  }
+
+  .portfolio-loader .loader-percentage {
+    font-size: 1.3rem !important;
+  }
+
+  .portfolio-loader .loader-dots {
+    display: none !important;
+  }
+
+  .portfolio-loader .loader-cloud-one,
+  .portfolio-loader .loader-cloud-two {
+    transform: scale(0.75);
+  }
+}
