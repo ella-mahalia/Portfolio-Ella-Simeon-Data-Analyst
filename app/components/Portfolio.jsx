@@ -304,12 +304,7 @@ export const Portfolio = () => {
                 className={`selected-work-index-item ${
                   isActive ? "is-active" : ""
                 }`}
-                onClick={() =>
-                  setActiveProjectId(project.id)
-                }
-                onMouseEnter={() =>
-                  setActiveProjectId(project.id)
-                }
+                onClick={() => setActiveProjectId(project.id)}
                 aria-pressed={isActive}
               >
                 <div className="selected-work-index-thumb-wrap">
